@@ -17,7 +17,11 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: sih_dms
     volumes:
-      - db-data:/var/lib/postgresql/data
+      # Mounted one level above the data directory on purpose. From 18 the
+      # image keeps its data in a major-version subdirectory and refuses to
+      # start against a volume mounted at .../data, so that pg_upgrade can
+      # run without crossing a mount boundary.
+      - db-data:/var/lib/postgresql
     healthcheck:
       # The app must not start before the database can answer.
       test: ["CMD-SHELL", "pg_isready -U postgres -d sih_dms"]
@@ -28,7 +32,8 @@ services:
   # Write-once object storage. Documents belong here rather than on the
   # container filesystem, which is wiped on every restart.
   storage:
-    image: minio/minio
+    # quay.io, not Docker Hub: minio/minio is no longer pullable from there.
+    image: quay.io/minio/minio
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: minioadmin
@@ -69,6 +74,12 @@ services:
       REDACTION_ENABLED: "false"
       OCR_LANGS: eng+hin
       SMS_PROVIDER: console
+      # This compose file is the demo, and the console SMS provider refuses
+      # to send when NODE_ENV=production - which the image sets, because it
+      # is also the production image. Without this override nobody can get
+      # past the sign-in code. Anything real sets SMS_PROVIDER=twilio and
+      # leaves NODE_ENV alone.
+      NODE_ENV: development
       # The seam: an identity document filed as evidence is sent here,
       # and the verdict lands on that case's audit trail. Unset it and
       # uploads are simply recorded as not screened.
