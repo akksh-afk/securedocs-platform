@@ -1,0 +1,1294 @@
+openapi: 3.0.3
+
+info:
+  title: Secure Legal DMS API
+  version: 0.1.0
+  description: >
+    Backend contract for the SIH 2026 secure document management system.
+    This file is the source of truth. Do not change an endpoint without
+    telling the whole team in writing.
+
+servers:
+  - url: http://localhost:8000/api/v1
+    description: Local development
+
+tags:
+  - name: auth
+  - name: cases
+  - name: documents
+  - name: audit
+
+security:
+  - sessionToken: []
+
+paths:
+
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: Step 1 of login. Returns an MFA challenge, not a session.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [service_number, password]
+              properties:
+                service_number:
+                  type: string
+                  example: DL-SI-40219
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Credentials accepted, MFA code required
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mfa_token:
+                    type: string
+                    description: Short-lived token to pass to /auth/mfa/verify
+                  expires_in:
+                    type: integer
+                    example: 300
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/mfa/verify:
+    post:
+      tags: [auth]
+      summary: >
+        Step 2 of the authenticator-app path. Exchanges a TOTP code for a
+        session. The account must have an authenticator enrolled - a
+        password alone never yields a session - and the challenge is
+        discarded after 5 wrong codes.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [mfa_token, code]
+              properties:
+                mfa_token:
+                  type: string
+                code:
+                  type: string
+                  pattern: '^[0-9]{6}$'
+                  example: "418203"
+      responses:
+        '200':
+          description: Session issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_token:
+                    type: string
+                  expires_at:
+                    type: string
+                    format: date-time
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/otp/request:
+    post:
+      tags: [auth]
+      summary: >
+        Sign-in, step 1. Checks service number and password, and that the
+        mobile number is the officer's registered one; only then texts a
+        6-digit code to it. Codes expire in 5 minutes; at most 3 per
+        officer per 15 minutes, 60 s apart. Only an HMAC of the code is
+        stored.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [service_number, password, mobile_number]
+              properties:
+                service_number:
+                  type: string
+                password:
+                  type: string
+                mobile_number:
+                  type: string
+                  description: E.164, or ten digits read as +91
+                  example: "9876543210"
+      responses:
+        '202':
+          description: Code sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  otp_token:
+                    type: string
+                    format: uuid
+                    description: >
+                      Names the code to verify in step 2. Random per request and
+                      issued only to a caller that passed the password, so nobody
+                      else can spend this officer's attempts.
+                  message:
+                    type: string
+                  expires_in:
+                    type: integer
+                  resend_after:
+                    type: integer
+        '400':
+          description: A field is missing, or the mobile number is not valid
+        '401':
+          description: >
+            Invalid credentials - the same answer for a wrong password and
+            for a mobile number that is not the officer's
+        '409':
+          description: >
+            no_mobile_registered - the password was right but the account has no
+            mobile number, so no code can be sent
+        '429':
+          description: Too many requests from this address, or codes for this officer
+        '502':
+          description: The SMS provider could not send the code
+
+  /auth/otp/verify:
+    post:
+      tags: [auth]
+      summary: >
+        Sign-in, step 2. Exchanges the code for a session. Keyed on the
+        otp_token from step 1, so only the caller that passed the password
+        can spend the code's attempts. Each guess costs one of 5; a code
+        works once, and requesting a new code retires the previous one.
+        Unknown token, wrong, expired, exhausted or used code all return
+        the same 401.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [otp_token, otp]
+              properties:
+                otp_token:
+                  type: string
+                  format: uuid
+                  description: From the step 1 response
+                otp:
+                  type: string
+                  pattern: '^[0-9]{6}$'
+      responses:
+        '200':
+          description: Session issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_token:
+                    type: string
+                  expires_at:
+                    type: string
+                    format: date-time
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          description: invalid_code
+        '429':
+          description: Too many attempts from this address
+
+  /auth/logout:
+    post:
+      tags: [auth]
+      summary: Revoke the current session immediately.
+      responses:
+        '204':
+          description: Session destroyed
+
+  /cases:
+    get:
+      tags: [cases]
+      summary: List cases the caller is assigned to.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: Assigned cases only, never all cases
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Case'
+                  total:
+                    type: integer
+    post:
+      tags: [cases]
+      summary: >
+        Open a case (case.create). Station and creator come from the
+        session; the creator is assigned in the same transaction.
+        Audited as case_create.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [case_number, title]
+              properties:
+                case_number:
+                  type: string
+                title:
+                  type: string
+                sensitivity:
+                  $ref: '#/components/schemas/Sensitivity'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: Case number already exists
+
+  /cases/{case_id}:
+    parameters:
+      - $ref: '#/components/parameters/CaseId'
+    get:
+      tags: [cases]
+      summary: Get one case, with the officers currently assigned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      tags: [cases]
+      summary: >
+        Change title, status or sensitivity (case.update). Audited as
+        case_update with every changed field as {from, to}.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                status:
+                  type: string
+                  enum: [open, under_investigation, charge_sheeted, closed]
+                sensitivity:
+                  $ref: '#/components/schemas/Sensitivity'
+      responses:
+        '200':
+          description: Updated (or unchanged)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          description: Nothing to change, or an invalid value
+        '403':
+          description: >
+            Your rank does not permit this, or the change would lower the case's
+            sensitivity - that only ever goes up, since lowering it switches off
+            the redaction applied to evidence already released
+
+  /cases/{case_id}/documents:
+    parameters:
+      - $ref: '#/components/parameters/CaseId'
+    get:
+      tags: [documents]
+      summary: List documents in a case.
+      parameters:
+        - name: doc_type
+          in: query
+          schema:
+            $ref: '#/components/schemas/DocType'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Document'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /cases/{case_id}/protected-identities:
+    parameters:
+      - $ref: '#/components/parameters/CaseId'
+    get:
+      tags: [cases]
+      summary: >
+        Identities redaction removes from every export on this case.
+        Readable only by officers assigned to the case. Never exported.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProtectedIdentity'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags: [cases]
+      summary: >
+        Flag an identity as protected. Deciding who counts is an
+        investigative judgement, so this needs case.assign.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [value]
+              properties:
+                value:
+                  type: string
+                kind:
+                  type: string
+                  enum: [name, address, phone, relationship]
+                  default: name
+      responses:
+        '201':
+          description: Registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProtectedIdentity'
+        '400':
+          description: value is required
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /cases/{case_id}/assignments:
+    parameters:
+      - $ref: '#/components/parameters/CaseId'
+    post:
+      tags: [cases]
+      summary: Put an officer on the case (case.assign). Audited as assign.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [user_id]
+              properties:
+                user_id:
+                  type: string
+                  format: uuid
+      responses:
+        '201':
+          description: Assigned
+        '404':
+          description: No active officer with that id
+        '409':
+          description: Already on the case
+
+  /cases/{case_id}/assignments/{user_id}:
+    parameters:
+      - $ref: '#/components/parameters/CaseId'
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    delete:
+      tags: [cases]
+      summary: >
+        Take an officer off the case (case.assign). Audited as unassign.
+        You cannot remove yourself, so someone able to assign always remains.
+      responses:
+        '204':
+          description: Removed
+        '400':
+          description: Tried to remove yourself
+        '404':
+          description: That officer is not on this case
+
+  /cases/{case_id}/audit:
+    parameters:
+      - $ref: '#/components/parameters/CaseId'
+    get:
+      tags: [audit]
+      summary: >
+        Every event on this case, oldest first - creation, edits,
+        assignments, evidence filed, viewed, versioned, verified,
+        released, and refused attempts - each with the acting officer.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chain_intact:
+                    type: boolean
+                  broken_at:
+                    type: integer
+                    nullable: true
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditEntry'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /documents:
+    post:
+      tags: [documents]
+      summary: >
+        File evidence. Creates version 1. The database assigns a
+        type-specific evidence number within the case (FIR-001, STM-002).
+        Audited as upload in the same transaction.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [case_id, file]
+              properties:
+                case_id:
+                  type: string
+                  format: uuid
+                title:
+                  type: string
+                  description: Optional description; defaults to the evidence number
+                doc_type:
+                  $ref: '#/components/schemas/DocType'
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: >
+            Stored and hashed. Ledger anchoring and OCR run asynchronously,
+            so anchor_status will usually be "pending" here.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentVersion'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '413':
+          description: File too large
+
+  /documents/search:
+    get:
+      tags: [documents]
+      summary: >
+        Full-text search over OCR-extracted text. Results are restricted
+        to cases the caller is assigned to, so a search can never reveal
+        that a document exists in a case they are not on. Every search is
+        written to the audit log.
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SearchHit'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+        '400':
+          description: q is required
+
+  /documents/{document_id}:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [documents]
+      summary: Document metadata. Never returns file bytes.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags: [documents]
+      summary: >
+        Always refused - evidence is never deleted. The attempt is
+        recorded in the case audit trail as delete_attempt.
+      responses:
+        '405':
+          description: immutable
+
+  /documents/{document_id}/content:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [documents]
+      summary: Download the decrypted file. Always writes an audit entry.
+      parameters:
+        - name: version
+          in: query
+          description: Defaults to the current version.
+          schema:
+            type: integer
+        - name: redacted
+          in: query
+          description: >
+            Forced to true regardless of this value when the case sensitivity
+            requires it. Redaction is applied to a copy; the stored original
+            is never modified.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: File stream
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /documents/{document_id}/versions:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [documents]
+      summary: Full version history. Nothing is ever overwritten or deleted.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentVersion'
+    post:
+      tags: [documents]
+      summary: Upload a replacement file as a new version.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                change_note:
+                  type: string
+      responses:
+        '201':
+          description: New version created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentVersion'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /documents/{document_id}/verify:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    post:
+      tags: [documents]
+      summary: >
+        Recompute the stored file's hash and compare it to the ledger.
+        This is the tamper-detection demo.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                version:
+                  type: integer
+      responses:
+        '200':
+          description: >
+            Returns 200 even when verification fails. A mismatch is a valid
+            answer, not an error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationResult'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /documents/{document_id}/certificate:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [documents]
+      summary: >
+        Generate the Part A certificate required under Section 63(4) of the
+        Bharatiya Sakshya Adhiniyam 2023.
+      responses:
+        '200':
+          description: PDF certificate
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '409':
+          description: Cannot issue a certificate for an unverified document
+
+  /documents/{document_id}/text:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [documents]
+      summary: >
+        OCR output and the entities extracted from it. On a protected
+        case the text is redacted and the identifying entity lists
+        (persons, addresses, phones) are not returned at all; when
+        redaction is unavailable this refuses with 503 rather than
+        releasing the text.
+      parameters:
+        - name: version
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: integer
+                  ocr_status:
+                    type: string
+                    enum: [pending, processing, done, failed]
+                  redacted:
+                    type: boolean
+                  text:
+                    type: string
+                  entities:
+                    $ref: '#/components/schemas/Entities'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          description: Protected case and redaction is unavailable
+
+  /documents/{document_id}/custody:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [documents]
+      summary: >
+        Chain of custody straight off the ledger - every write to this
+        version's key, oldest first. On the Fabric backend this is
+        GetHistoryForKey and no single organisation can edit it.
+      parameters:
+        - name: version
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ledger_backend:
+                    type: string
+                    enum: [fabric, stub]
+                    description: >
+                      "stub" is in-memory and proves nothing. Check this
+                      before presenting the result as a blockchain.
+                  version:
+                    type: integer
+                  entries:
+                    type: array
+                    items:
+                      type: object
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /documents/{document_id}/audit:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [audit]
+      summary: Hash-linked event history for this document, oldest first.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chain_intact:
+                    type: boolean
+                    description: False if any entry has been altered or removed
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditEntry'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /notifications:
+    get:
+      tags: [notifications]
+      summary: >
+        The caller's integrity alerts, newest first (max 50). Raised by
+        the automatic check that re-verifies every file in cases under
+        investigation every 20 minutes: kind "tamper" when a version first
+        fails, "integrity_restored" if it verifies again. Only for cases
+        the caller is still assigned to.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unread:
+                    type: integer
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        kind:
+                          type: string
+                          enum: [tamper, integrity_restored]
+                        case_id:
+                          type: string
+                          format: uuid
+                        document_id:
+                          type: string
+                          format: uuid
+                        version:
+                          type: integer
+                        message:
+                          type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                        read_at:
+                          type: string
+                          format: date-time
+                          nullable: true
+
+  /notifications/{id}/read:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    post:
+      tags: [notifications]
+      summary: Mark one of your own notifications read.
+      responses:
+        '204':
+          description: Marked read
+        '404':
+          description: No such notification of yours
+
+  # ---------------------------------------------------------------
+  # ICJS exchange. MOCK - fixture-backed, no live CCTNS connection.
+  # Every response carries "mock": true.
+  # ---------------------------------------------------------------
+
+  /icjs/fir:
+    get:
+      tags: [icjs]
+      summary: >
+        FIR reference lookup against ICJS. Fixture-backed mock.
+        The FIR number is a query parameter, not a path segment, because
+        FIR numbers contain slashes and an encoded %2F in a path is
+        normalised or rejected by most reverse proxies.
+      parameters:
+        - name: fir_number
+          in: query
+          required: true
+          schema:
+            type: string
+          example: FIR/0142/2026
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IcjsFir'
+        '400':
+          description: fir_number is required
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /icjs/cases/{case_id}/link:
+    parameters:
+      - $ref: '#/components/parameters/CaseId'
+    post:
+      tags: [icjs]
+      summary: >
+        Link a case to an FIR held in CCTNS. Returns the acknowledgement
+        ICJS would return; persists nothing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [fir_number]
+              properties:
+                fir_number:
+                  type: string
+      responses:
+        '200':
+          description: Linked
+        '400':
+          description: fir_number is required
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /icjs/documents/{document_id}/payload:
+    parameters:
+      - $ref: '#/components/parameters/DocumentId'
+    get:
+      tags: [icjs]
+      summary: >
+        The exact metadata payload that would be pushed to ICJS for this
+        document. Read-only; transmits nothing. Carries a pointer and a
+        hash, never the file, its text, or any victim data.
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+
+  securitySchemes:
+    sessionToken:
+      type: http
+      scheme: bearer
+      description: Opaque session token from /auth/mfa/verify
+
+  parameters:
+    CaseId:
+      name: case_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    DocumentId:
+      name: document_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      schema:
+        type: integer
+        default: 25
+        maximum: 100
+
+  schemas:
+
+    DocType:
+      type: string
+      enum: [fir, statement, forensic_report, charge_sheet, court_filing, notice, other]
+
+    Rank:
+      type: string
+      enum: [constable, head_constable, sub_inspector, inspector, dcp, prosecutor, judge, forensic_analyst]
+
+    Sensitivity:
+      type: string
+      description: >
+        "protected" triggers mandatory redaction on every export path,
+        for offences covered by Section 72 BNS.
+      enum: [normal, restricted, protected]
+
+    Entities:
+      type: object
+      description: >
+        Output of the entity rules (F4). The identifying lists feed
+        redaction; the evidentiary ones are preserved through it and are
+        the only ones returned for a protected case.
+      properties:
+        persons:
+          type: array
+          description: Identifying. Absent on a protected case.
+          items:
+            type: string
+        addresses:
+          type: array
+          description: Identifying. Absent on a protected case.
+          items:
+            type: string
+        phones:
+          type: array
+          description: Identifying. Absent on a protected case.
+          items:
+            type: string
+        fir_numbers:
+          type: array
+          description: Evidentiary. Never redacted.
+          items:
+            type: string
+        sections:
+          type: array
+          description: Evidentiary. Never redacted.
+          items:
+            type: string
+        dates:
+          type: array
+          description: Evidentiary. Never redacted.
+          items:
+            type: string
+        confidence:
+          type: number
+          nullable: true
+          description: OCR confidence, 0-100.
+
+    ProtectedIdentity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        value:
+          type: string
+        kind:
+          type: string
+          enum: [name, address, phone, relationship]
+        added_at:
+          type: string
+          format: date-time
+
+    SearchHit:
+      type: object
+      properties:
+        document_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        doc_type:
+          $ref: '#/components/schemas/DocType'
+        case_id:
+          type: string
+          format: uuid
+        case_number:
+          type: string
+        sensitivity:
+          $ref: '#/components/schemas/Sensitivity'
+        version:
+          type: integer
+        uploaded_at:
+          type: string
+          format: date-time
+        snippet:
+          type: string
+          nullable: true
+          description: >
+            Null on a "protected" case until the redaction service is
+            live. The extracted text of a Section 72 document contains
+            exactly the victim identity redaction exists to remove, and a
+            search result is an export path like any other. The hit still
+            appears; the text does not.
+
+    IcjsFir:
+      type: object
+      description: FIR reference held in CCTNS. Fixture-backed mock.
+      properties:
+        fir_number:
+          type: string
+          example: FIR/0142/2026
+        cctns_id:
+          type: string
+        police_station:
+          type: string
+        district:
+          type: string
+        state:
+          type: string
+        registered_on:
+          type: string
+          format: date-time
+        act:
+          type: string
+        sections:
+          type: array
+          items:
+            type: string
+        investigating_officer:
+          type: object
+          properties:
+            name:
+              type: string
+            service_number:
+              type: string
+            rank:
+              $ref: '#/components/schemas/Rank'
+        status:
+          type: string
+        accused_count:
+          type: integer
+        source:
+          type: string
+        mock:
+          type: boolean
+          description: Always true until a real ICJS connection exists.
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        service_number:
+          type: string
+        rank:
+          $ref: '#/components/schemas/Rank'
+        station:
+          type: string
+
+    Case:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        case_number:
+          type: string
+          example: FIR/0142/2026
+        title:
+          type: string
+        sensitivity:
+          $ref: '#/components/schemas/Sensitivity'
+        status:
+          type: string
+          enum: [open, under_investigation, charge_sheeted, closed]
+        created_at:
+          type: string
+          format: date-time
+
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        case_id:
+          type: string
+          format: uuid
+        evidence_number:
+          type: string
+          description: Assigned by the database, unique within the case, never changes
+          example: STM-002
+        title:
+          type: string
+        doc_type:
+          $ref: '#/components/schemas/DocType'
+        current_version:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+
+    DocumentVersion:
+      type: object
+      properties:
+        document_id:
+          type: string
+          format: uuid
+        version:
+          type: integer
+        sha256:
+          type: string
+          description: Hash of the original bytes, computed before encryption
+          example: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+        size_bytes:
+          type: integer
+        uploaded_by:
+          $ref: '#/components/schemas/User'
+        uploaded_at:
+          type: string
+          format: date-time
+        anchor_status:
+          type: string
+          enum: [pending, anchored, failed]
+        ledger_tx_id:
+          type: string
+          nullable: true
+        ocr_status:
+          type: string
+          enum: [pending, done, failed]
+
+    VerificationResult:
+      type: object
+      properties:
+        verified:
+          type: boolean
+        version:
+          type: integer
+        stored_hash:
+          type: string
+          description: Hash recomputed from the file on disk right now
+        ledger_hash:
+          type: string
+          description: Hash recorded on the ledger at upload time
+        anchored_at:
+          type: string
+          format: date-time
+        signed_by:
+          $ref: '#/components/schemas/User'
+
+    AuditEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        actor:
+          $ref: '#/components/schemas/User'
+        action:
+          type: string
+          enum: [upload, view, download, export_redacted, new_version, verify, search,
+                 share, access_denied, login, case_create, case_update, assign,
+                 unassign, identity_add, delete_attempt]
+        case_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Null only for login, search and pre-case denials (enforced by the database)
+        document_id:
+          type: string
+          format: uuid
+        evidence_number:
+          type: string
+          nullable: true
+        detail:
+          type: object
+          nullable: true
+          description: Action-specific; case_update carries changes as {field - {from, to}}
+        occurred_at:
+          type: string
+          format: date-time
+        prev_hash:
+          type: string
+        entry_hash:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: forbidden
+        message:
+          type: string
+          example: You are not assigned to this case.
+
+  responses:
+    Unauthorized:
+      description: Not logged in, or session expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: >
+        Logged in but not permitted. Always logged as access_denied.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: >
+        Returned instead of 403 where confirming existence would itself
+        leak information about a protected case.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

@@ -1,0 +1,14 @@
+{
+ "description": "Original build 2026.09.16.06-VERIFIED-MRZ measured on the same legacy samples before any changes (Tesseract-only OCR, ELA heuristics).",
+ "mrz_exact_readable": "48/156 (30.8%)",
+ "mrz_exact_all": "48/162",
+ "tamper_recall": "0/72",
+ "tamper_false_alarms": "6/90",
+ "mean_secs_per_document": 9.52,
+ "acceptance_script": "FAIL (2 of 3 reference samples unreadable)",
+ "pytest": "1 failed, 4 passed",
+ "security_issues": [
+  "MRZ repair rebuilt check digits, so a forged MRZ with a stale composite digit was reported valid",
+  "Upload handler wrote to /tmp/<client filename> (path traversal)"
+ ]
+}

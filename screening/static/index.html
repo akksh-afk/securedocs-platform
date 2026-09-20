@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Document Screening Console</title>
+<style>
+  :root { --bg:#f5f6f8; --panel:#fff; --ink:#1b1f24; --muted:#5b6470; --line:#dde1e6; --accent:#1f5eff;
+          --low:#127a3f; --low-bg:#e3f4ea; --med:#9a6100; --med-bg:#fff2d9; --high:#b3261e; --high-bg:#fde7e5; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#111418; --panel:#1a1e24; --ink:#e7eaee; --muted:#9aa4b0; --line:#2b313a; --accent:#7aa2ff;
+            --low:#5fd08f; --low-bg:#15301f; --med:#f0b858; --med-bg:#33280f; --high:#ff8a80; --high-bg:#3a1714; }
+  }
+  * { box-sizing:border-box }
+  body { margin:0; font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink) }
+  header { padding:14px 20px; border-bottom:1px solid var(--line); background:var(--panel) }
+  header h1 { margin:0; font-size:18px } header p { margin:2px 0 0; color:var(--muted); font-size:13px }
+  main { max-width:1200px; margin:0 auto; padding:16px }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:16px }
+  form { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; align-items:end }
+  label { display:flex; flex-direction:column; gap:4px; font-size:13px; color:var(--muted) }
+  input, select, button { font:inherit; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:7px }
+  button { background:var(--accent); color:#fff; border:0; font-weight:600; cursor:pointer; padding:10px }
+  button:disabled { opacity:.6; cursor:wait }
+  .banner { display:flex; flex-wrap:wrap; gap:16px; align-items:center; border-radius:10px; padding:16px }
+  .banner .disp { font-size:22px; font-weight:700 } .banner .score { font-size:30px; font-weight:700; margin-left:auto }
+  .LOW { background:var(--low-bg); color:var(--low) } .MEDIUM { background:var(--med-bg); color:var(--med) } .HIGH { background:var(--high-bg); color:var(--high) }
+  h2 { font-size:16px; margin:0 0 10px } h3 { font-size:14px; margin:14px 0 6px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em }
+  .grid { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:16px }
+  @media (max-width: 860px) { .grid { grid-template-columns:1fr } }
+  img.doc { width:100%; border-radius:6px; border:1px solid var(--line) }
+  table { width:100%; border-collapse:collapse; font-size:13px } td, th { text-align:left; padding:5px 6px; border-bottom:1px solid var(--line); vertical-align:top }
+  th { color:var(--muted); font-weight:600 }
+  .chip { display:inline-block; font-size:11px; font-weight:700; padding:1px 7px; border-radius:10px }
+  .PASS { background:var(--low-bg); color:var(--low) } .WARN { background:var(--med-bg); color:var(--med) } .FAIL { background:var(--high-bg); color:var(--high) }
+  ul { margin:0; padding-left:18px } li { margin:3px 0 }
+  code { font-family:ui-monospace,Consolas,monospace; font-size:12px; word-break:break-all }
+  .muted { color:var(--muted); font-size:13px }
+  .err { color:var(--high) }
+</style>
+</head>
+<body>
+<header>
+  <h1>Document Screening Console</h1>
+  <p>AI-assisted identity document screening. Recommendations support, and never replace, the officer's decision.</p>
+</header>
+<main>
+  <section class="panel">
+    <form id="f">
+      <label>Document image * <input type="file" name="document" accept="image/*" required></label>
+      <label>Live photo of traveller <input type="file" name="live_photo" accept="image/*" capture="user"></label>
+      <label>Companion document (e.g. visa) <input type="file" name="companion" accept="image/*"></label>
+      <label>Document type
+        <select name="document_type"><option value="">Auto-detect</option><option>passport</option><option>visa</option>
+          <option>national_id</option><option>driving_licence</option><option>residence_permit</option></select></label>
+      <label>Checkpoint ID <input name="checkpoint_id" placeholder="e.g. ATTARI-ICP-3"></label>
+      <label>Officer ID <input name="officer_id"></label>
+      <label>Intended stay (days) <input name="intended_stay_days" type="number" min="0"></label>
+      <button id="go" type="submit">Screen document</button>
+    </form>
+  </section>
+  <div id="out"></div>
+</main>
+<script>
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $ = id => document.getElementById(id);
+
+$('f').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  for (const [k, v] of [...fd.entries()]) if (v === '' || (v instanceof File && !v.name)) fd.delete(k);
+  fd.set('include_images', 'true');
+  $('go').disabled = true; $('go').textContent = 'Screening...';
+  $('out').innerHTML = '';
+  try {
+    const r = await fetch('/api/v1/screen', { method: 'POST', body: fd });
+    const raw = await r.text();
+    let data;
+    try { data = JSON.parse(raw); } catch { data = null; }
+    if (!r.ok) throw new Error(`${r.status} ${r.statusText}: ${(data && data.detail) || raw.slice(0, 300)}`);
+    if (!data) throw new Error('The server returned an unreadable response.');
+    render(data);
+  } catch (err) {
+    $('out').innerHTML = `<div class="panel err">Screening failed: ${esc(err.message)}</div>`;
+  } finally {
+    $('go').disabled = false; $('go').textContent = 'Screen document';
+  }
+});
+
+function render(d) {
+  const r = d.risk;
+  let h = `<section class="banner ${r.risk_band}">
+      <div><div class="disp">${esc(r.disposition.replaceAll('_', ' '))}</div><div>${esc(r.disposition_meaning)}</div></div>
+      <div class="score">${r.risk_score}<span style="font-size:14px"> / 100 risk</span></div></section>
+    <section class="panel"><h2>Why</h2>` +
+    (r.reasons.length ? `<ul>${r.reasons.slice(0, 12).map(x => `<li><span class="chip ${x.status}">${esc(x.severity)}</span> ${esc(x.message)}</li>`).join('')}</ul>`
+                      : '<p class="muted">No adverse findings.</p>') +
+    `<p class="muted">Processed in ${d.processing_ms} ms &middot; policy ${esc(d.policy_version)} &middot; screening ${esc(d.screening_id)}` +
+    (d.audit ? ` &middot; audit #${d.audit.seq}` : '') + `</p></section>`;
+
+  const fvb = d.face_verification;
+  if (fvb.performed) {
+    h += `<section class="panel"><h2>Face verification: ${esc(fvb.decision)}</h2>
+      <p>Similarity ${fvb.similarity ?? 'n/a'} (match threshold ${fvb.threshold})</p>
+      ${fvb.issues.length ? `<ul>${fvb.issues.map(i => `<li>${esc(i)}</li>`).join('')}</ul>` : ''}</section>`;
+  }
+  for (const c of d.identity_conflicts || []) h += `<section class="panel err">${esc(c.message)}</section>`;
+
+  for (const doc of d.documents) {
+    const f = doc.ocr.fields, src = doc.ocr.field_sources;
+    const tamper = Object.entries(doc.tampering.use_cases).map(([k, v]) =>
+      `<tr><td>${esc(k.replaceAll('_', ' '))}</td><td><span class="chip ${v.detected ? 'FAIL' : v.evidence.length ? 'WARN' : 'PASS'}">${v.detected ? 'DETECTED' : v.evidence.length ? 'CHECK' : 'CLEAR'}</span></td>
+       <td>${v.evidence.map(e => esc(e.message)).join('<br>')}</td></tr>`).join('');
+    h += `<section class="panel"><h2>${esc(doc.document_type.replaceAll('_', ' '))} (${esc(doc.role)}) &middot; classified with ${(doc.classification.confidence * 100).toFixed(0)}% confidence</h2>
+      <div class="grid"><div>
+        ${doc.annotated_image ? `<img class="doc" alt="Rectified document with findings" src="${doc.annotated_image}">` : ''}
+        <h3>Machine readable zone</h3>
+        ${doc.ocr.mrz.valid_format ? `<code>${doc.ocr.mrz.normalized_lines.map(esc).join('<br>')}</code>
+          <p class="muted">${doc.ocr.mrz.format} &middot; check digits ${doc.ocr.mrz.overall_check_digit_valid ? 'valid' : 'FAILED'}</p>` : '<p class="muted">Not read</p>'}
+        <h3>Capture</h3><p class="muted">Quality ${doc.capture.quality_score}/100</p>
+        ${doc.capture.tips.length ? `<ul>${doc.capture.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
+      </div><div>
+        <h3>Extracted fields</h3><table><tr><th>Field</th><th>Value</th><th>Source</th></tr>
+        ${Object.entries(f).map(([k, v]) => `<tr><td>${esc(k.replaceAll('_', ' '))}</td><td>${esc(v)}</td><td class="muted">${esc(src[k] || '')}</td></tr>`).join('')}</table>
+        <h3>Tampering</h3><table>${tamper}</table>
+      </div></div>
+      <h3>Validation</h3><table><tr><th>Status</th><th>Check</th><th>Detail</th></tr>
+      ${doc.validation.checks.map(c => `<tr><td><span class="chip ${c.status}">${c.status}</span></td><td>${esc(c.id)}</td><td>${esc(c.message)}</td></tr>`).join('')}</table>
+      <p class="muted">Timings (ms): ${Object.entries(doc.timings_ms).map(([k, v]) => `${esc(k)} ${v}`).join(' &middot; ')}</p>
+    </section>`;
+  }
+  $('out').innerHTML = h;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+{
+ "history": [
+  {
+   "epoch": 0,
+   "loss": 0.07788704560389631,
+   "secs": 175,
+   "val_seen_exact": 0.8765,
+   "val_holdout_exact": 0.8283333333333334,
+   "val_seen_cer": 0.005478375546482639,
+   "val_holdout_cer": 0.007158170124632099
+  },
+  {
+   "epoch": 1,
+   "loss": 0.08121626199004611,
+   "secs": 5697,
+   "val_seen_exact": 0.8831666666666667,
+   "val_holdout_exact": 0.8583333333333333,
+   "val_seen_cer": 0.005329334826751454,
+   "val_holdout_cer": 0.006458704262199775
+  },
+  {
+   "epoch": 2,
+   "loss": 0.07741603534515522,
+   "secs": 165,
+   "val_seen_exact": 0.886,
+   "val_holdout_exact": 0.8425,
+   "val_seen_cer": 0.005058351699967482,
+   "val_holdout_cer": 0.006776643290578104
+  },
+  {
+   "epoch": 3,
+   "loss": 0.07231473153381948,
+   "secs": 155,
+   "val_seen_exact": 0.8931666666666667,
+   "val_holdout_exact": 0.8318333333333333,
+   "val_seen_cer": 0.004719622791487517,
+   "val_holdout_cer": 0.007094582318956434
+  },
+  {
+   "epoch": 4,
+   "loss": 0.0678000596414128,
+   "secs": 158,
+   "val_seen_exact": 0.9055,
+   "val_holdout_exact": 0.8533333333333334,
+   "val_seen_cer": 0.00429508255952596,
+   "val_holdout_cer": 0.006136223247701755
+  },
+  {
+   "epoch": 5,
+   "loss": 0.06765777858314545,
+   "secs": 156,
+   "val_seen_exact": 0.8958333333333334,
+   "val_holdout_exact": 0.8765,
+   "val_seen_cer": 0.004407992195685949,
+   "val_holdout_cer": 0.00532320773227717
+  },
+  {
+   "epoch": 6,
+   "loss": 0.06600212718592202,
+   "secs": 156,
+   "val_seen_exact": 0.9133333333333333,
+   "val_holdout_exact": 0.8805,
+   "val_seen_cer": 0.00370795245149402,
+   "val_holdout_cer": 0.005055230551215435
+  },
+  {
+   "epoch": 7,
+   "loss": 0.0624844548066698,
+   "secs": 117,
+   "val_seen_exact": 0.9166666666666666,
+   "val_holdout_exact": 0.8633333333333333,
+   "val_seen_cer": 0.003563428117209235,
+   "val_holdout_cer": 0.005550307038261691
+  },
+  {
+   "epoch": 8,
+   "loss": 0.05768953406777968,
+   "secs": 110,
+   "val_seen_exact": 0.9205,
+   "val_holdout_exact": 0.8788333333333334,
+   "val_seen_cer": 0.0034595512519420457,
+   "val_holdout_cer": 0.005018894662257912
+  },
+  {
+   "epoch": 9,
+   "loss": 0.06013511119268532,
+   "secs": 113,
+   "val_seen_exact": 0.9195,
+   "val_holdout_exact": 0.877,
+   "val_seen_cer": 0.0034911659500668425,
+   "val_holdout_cer": 0.005077940481813888
+  }
+ ],
+ "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<",
+ "input": [
+  1,
+  32,
+  512
+ ],
+ "blank": 0
+}

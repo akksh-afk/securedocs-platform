@@ -1,0 +1,164 @@
+{
+ "legacy": {
+  "all": "151/162",
+  "excluding_mrz_covered": "151/156",
+  "rate_excluding_covered": 0.9679,
+  "mean_secs": 0.142,
+  "by_condition": {
+   "combo_worst": "6/6",
+   "defocus": "6/6",
+   "glare": "6/6",
+   "good": "6/6",
+   "jpeg": "6/6",
+   "low_light": "6/6",
+   "motion_blur": "1/6",
+   "noise": "6/6",
+   "occluded_glare": "6/6",
+   "overexposed": "6/6",
+   "partial": "0/6",
+   "perspective": "6/6",
+   "rotate180": "6/6",
+   "shadow": "6/6",
+   "tampered_glare": "24/24",
+   "tampered_good": "24/24",
+   "tampered_low_light": "24/24",
+   "tiny": "6/6"
+  },
+  "failures": [
+   {
+    "file": "samples/generated/identity_01_03_motion_blur.jpg",
+    "ok": false,
+    "secs": 0.33,
+    "lines": [
+     "P<UTOGUPTA<<AKSHIT<<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "K71M4P8294UTO8202147M3509180<<<<<<<<<<<<<<8B"
+    ],
+    "repairs": [
+     "composite_check[0] B->8"
+    ]
+   },
+   {
+    "file": "samples/generated/identity_01_11_partial.jpg",
+    "ok": false,
+    "secs": 0.37,
+    "lines": [
+     "I<<REYN<<GO9<<<<<EOA<<<CO<<<<<CT7<<2",
+     "AI<<PER<<TT1<<<<<<<HDQ<<DR<<<<2CG<<5"
+    ],
+    "repairs": [
+     "document_number_check[0] T->1",
+     "nationality[1] 1->I",
+     "date_of_expiry[0] Q->0",
+     "date_of_expiry[3] D->0",
+     "name[27] 7->T",
+     "name[30] 2->Z"
+    ]
+   },
+   {
+    "file": "samples/generated/identity_02_11_partial.jpg",
+    "ok": false,
+    "secs": 0.32,
+    "lines": [
+     "II<<<TT1<<O2<<<<<CD<<<CO<<<<CTZ<<<2<",
+     "I<ARRU<TA<<Q2<<<<<OO<<2EG<<<<2ZCQ<<5"
+    ],
+    "repairs": [
+     "nationality[2] 2->Z",
+     "date_of_birth[5] O->0",
+     "date_of_birth_check[0] O->0",
+     "date_of_expiry[3] G->6",
+     "name[2] 1->I",
+     "name[6] 2->Z",
+     "name[29] 2->Z"
+    ]
+   },
+   {
+    "file": "samples/generated/identity_03_03_motion_blur.jpg",
+    "ok": false,
+    "secs": 0.4,
+    "lines": [
+     "P<UTOMEHTA<<VIKRAM<<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "L5Q8021736UTO8509253M3011065<<<<<<<<<<<<<<06"
+    ],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_03_11_partial.jpg",
+    "ok": false,
+    "secs": 0.4,
+    "lines": [
+     "I<<I<MZEZ<<C2<<<<HD<O<P<CO<<<<CTZ<<2",
+     "<NZDGYH<<<TT1<<<<<<<CVNIJHS<<<<<N<<<"
+    ],
+    "repairs": [
+     "nationality[2] 1->I",
+     "date_of_expiry[2] I->1",
+     "date_of_expiry[5] S->5",
+     "name[7] 2->Z",
+     "name[30] 2->Z"
+    ]
+   },
+   {
+    "file": "samples/generated/identity_04_03_motion_blur.jpg",
+    "ok": false,
+    "secs": 0.1,
+    "lines": [
+     "P<UTOKHAN<<SAMA<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "A64X8R2053UT09703315F2906221<<<<<<<<<<<<<<04"
+    ],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_04_11_partial.jpg",
+    "ok": false,
+    "secs": 0.22,
+    "lines": [],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_05_03_motion_blur.jpg",
+    "ok": false,
+    "secs": 0.36,
+    "lines": [
+     "P<UTOSHARMA<<DEV<RAJ<<<<<<<<<<<<<<<<<<<<<<<<",
+     "N82B7K5642UT09104118M3309092<<<<<<<<<<<<<<80"
+    ],
+    "repairs": [
+     "nationality[2] 0->O"
+    ]
+   },
+   {
+    "file": "samples/generated/identity_05_11_partial.jpg",
+    "ok": false,
+    "secs": 0.22,
+    "lines": [],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_06_03_motion_blur.jpg",
+    "ok": false,
+    "secs": 0.37,
+    "lines": [
+     "P<UTOPARKER<<ELENA<<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "T49C2M7818UTO8011293F3612385<<<<<<<<<<<<<<88"
+    ],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_06_11_partial.jpg",
+    "ok": false,
+    "secs": 0.41,
+    "lines": [
+     "A<<<TTT<<OQO<<<<HD<D<<CO<<<<O<I<CTZ<",
+     "RA<<EA<<TT1<J<<<<<<WOCN<<TS<<<<IN<<<"
+    ],
+    "repairs": [
+     "document_number_check[0] T->1",
+     "nationality[0] 1->I",
+     "date_of_expiry[4] T->1",
+     "date_of_expiry[5] S->5"
+    ]
+   }
+  ]
+ }
+}

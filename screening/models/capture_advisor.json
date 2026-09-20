@@ -1,0 +1,8 @@
+{
+ "samples": 900,
+ "read_success_rate": 0.728,
+ "test_auc": 0.5992,
+ "recapture_flag_rate": 0.209,
+ "failures_caught": 0.279,
+ "good_captures_flagged": 0.183
+}

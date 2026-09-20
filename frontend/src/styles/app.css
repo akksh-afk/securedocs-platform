@@ -1,0 +1,608 @@
+/* ---------------------------------------------------------------
+   Styles for the six wired screens.
+
+   Kept in its own file rather than appended to index.css so the
+   original mock styling stays untouched and this can be read as one
+   piece. Colours follow the existing palette (#f5f7fb / #172033).
+   --------------------------------------------------------------- */
+
+:root {
+    --ok: #0f8a4a;
+    --ok-bg: #e6f6ed;
+    --bad: #c02626;
+    --bad-bg: #fdeaea;
+    --warn: #a86a00;
+    --warn-bg: #fff5e0;
+    --line: #e3e8f0;
+    --muted: #6b7688;
+    --accent: #2b4c9b;
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.page-loading {
+    padding: 48px;
+    color: var(--muted);
+}
+
+/* ---- alerts ---- */
+
+.alert {
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.alert-error {
+    background: var(--bad-bg);
+    color: var(--bad);
+    border: 1px solid #f3c9c9;
+}
+
+.alert-ok {
+    background: var(--ok-bg);
+    color: var(--ok);
+    border: 1px solid #bfe6cf;
+}
+
+/* ---- panels ---- */
+
+.panel {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.panel h2 {
+    font-size: 15px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.panel-warn {
+    border-color: #f0dcae;
+    background: var(--warn-bg);
+}
+
+.panel-warn h2 {
+    color: var(--warn);
+}
+
+/* ---- buttons ---- */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 15px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #fff;
+    color: var(--accent);
+}
+
+.btn-primary {
+    background: #12304f;
+    border-color: #12304f;
+}
+
+.btn-small {
+    padding: 6px 11px;
+    font-size: 13px;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 13px;
+    padding: 8px;
+}
+
+.action-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* ---- case list ---- */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+}
+
+.case-card {
+    display: block;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.case-card:hover {
+    border-color: var(--accent);
+}
+
+.case-card h3 {
+    font-size: 15px;
+    margin: 8px 0 12px;
+}
+
+.case-card-head,
+.case-card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.case-number {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.badge-protected {
+    background: var(--bad-bg);
+    color: var(--bad);
+}
+
+.badge-restricted {
+    background: var(--warn-bg);
+    color: var(--warn);
+}
+
+.status {
+    font-size: 12px;
+    text-transform: capitalize;
+    color: var(--muted);
+}
+
+.status-anchored {
+    color: var(--ok);
+}
+
+.status-failed {
+    color: var(--bad);
+}
+
+.status-pending {
+    color: var(--warn);
+}
+
+.status-processing {
+    color: var(--accent);
+}
+
+.status-done {
+    color: var(--ok);
+}
+
+/* ---- OCR output and extracted entities ---- */
+
+.alert-warn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--warn-bg);
+    color: var(--warn);
+    border: 1px solid #f0dcae;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin: 12px 0;
+}
+
+.entity-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 14px 0;
+}
+
+.entity-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.entity-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    min-width: 78px;
+}
+
+.chip {
+    background: #eef2fa;
+    color: #23385f;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+
+/* Identifying entities are only ever returned for a non-protected
+   case. Marked so nobody mistakes them for safe-to-share metadata. */
+.chip-identifying {
+    background: var(--bad-bg);
+    color: var(--bad);
+}
+
+/* How well the page was read. Colour carries the same meaning as
+   everywhere else: green fine, amber look at it, red do not trust it. */
+.reading-quality {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.chip-ok {
+    background: var(--ok-bg);
+    color: var(--ok);
+}
+
+.chip-warn {
+    background: var(--warn-bg);
+    color: var(--warn);
+}
+
+.chip-bad {
+    background: var(--bad-bg);
+    color: var(--bad);
+}
+
+.ocr-text {
+    background: #fafbfd;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+    margin: 12px 0;
+}
+
+.empty-state {
+    background: #fff;
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    color: var(--muted);
+}
+
+.empty-state h3 {
+    margin: 10px 0 6px;
+    color: #172033;
+}
+
+/* ---- forms ---- */
+
+.upload-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    align-items: end;
+    margin-top: 12px;
+}
+
+.upload-form input,
+.upload-form select,
+.inline-form input {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.inline-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+/* A select sizes itself to its longest option - an officer's full name,
+   rank and station - which pushed the whole page sideways. */
+.inline-form select {
+    flex: 1;
+    min-width: 0;
+}
+
+/* The case header carries the status control; wrap it under the title
+   on a narrow screen rather than overflowing. */
+.page-header {
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.mfa-hint {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 14px;
+}
+
+.identity-list {
+    list-style: none;
+    margin: 12px 0 0;
+}
+
+.identity-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid #f0e6cd;
+    font-size: 14px;
+}
+
+/* ---- tables ---- */
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.data-table th,
+.data-table td {
+    text-align: left;
+    padding: 9px 8px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+}
+
+.data-table th {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.hash {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    color: var(--muted);
+    word-break: break-all;
+}
+
+/* ---- the verdict. screen 5 is the demo. ---- */
+
+.verdict {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 34px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.verdict h2 {
+    font-size: 44px;
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+}
+
+.verdict p {
+    margin-top: 6px;
+    opacity: 0.92;
+    font-size: 14px;
+}
+
+.verdict-ok {
+    background: var(--ok);
+}
+
+.verdict-bad {
+    background: var(--bad);
+}
+
+.hash-compare {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.hash-box {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px;
+    background: #fafbfd;
+}
+
+.hash-box label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.hash-box code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    word-break: break-all;
+}
+
+.hash-box.ok {
+    border-color: #bfe6cf;
+    background: var(--ok-bg);
+}
+
+.hash-box.bad {
+    border-color: #f3c9c9;
+    background: var(--bad-bg);
+}
+
+.detail-list {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 9px 16px;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.detail-list dt {
+    color: var(--muted);
+}
+
+/* ---- audit ---- */
+
+.chain-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.chain-ok {
+    background: var(--ok-bg);
+    color: var(--ok);
+}
+
+.chain-bad {
+    background: var(--bad-bg);
+    color: var(--bad);
+}
+
+.timeline {
+    list-style: none;
+    margin-top: 8px;
+}
+
+.timeline li {
+    border-left: 2px solid var(--line);
+    padding: 10px 0 14px 16px;
+    position: relative;
+}
+
+.timeline li::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 15px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.timeline li.denied::before {
+    background: var(--bad);
+}
+
+.timeline-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.detail-json {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: #f7f9fc;
+    padding: 5px 8px;
+    border-radius: 6px;
+    margin: 6px 0;
+    overflow-x: auto;
+}
+
+/* ---- sidebar user + search ---- */
+
+.sidebar-user {
+    margin-top: auto;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 13px;
+}
+
+.topbar-search {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 9px 13px;
+    margin-bottom: 20px;
+    color: var(--muted);
+}
+
+.topbar-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.search-hit {
+    display: block;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.search-hit:hover {
+    background: #fafbfd;
+}
+
+.snippet {
+    font-size: 13px;
+    color: #3d4757;
+    margin-top: 4px;
+}

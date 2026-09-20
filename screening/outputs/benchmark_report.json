@@ -1,0 +1,150 @@
+{
+ "generated_at": "2026-09-17 00:50",
+ "today_for_validation": "2026-09-16",
+ "hardware": {
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+ },
+ "face": {
+  "genuine_pairs": 10,
+  "genuine_match_rate": 100.0,
+  "genuine_similarity_min": 0.916,
+  "note": "Only one real face photo is available offline (matplotlib sample); impostor rates need a consented face dataset. SFace published LFW accuracy: 99.40%."
+ },
+ "tamper_test_split": {
+  "documents": 600,
+  "auc": 0.7426,
+  "threshold": 0.9943,
+  "recall": 31.5,
+  "false_alarm_rate": 2.6,
+  "pixel_iou": 0.252,
+  "recall_by_type": {
+   "date_replace": 25.0,
+   "glyph_copy_move": 14.6,
+   "legacy_patch": 89.5,
+   "mrz_edit": 15.6,
+   "photo_replace": 55.9,
+   "stamp_clone": 16.0,
+   "stamp_forge": 37.2,
+   "text_replace": 14.9
+  }
+ },
+ "legacy": {
+  "samples": 162,
+  "mrz_exact_readable": "151/156 (96.8%)",
+  "mrz_exact_all": "151/162",
+  "classified_as_passport": 100.0,
+  "tamper_detection_full_pipeline": {
+   "recall": "18/72 (25.0%)",
+   "false_alarms": "1/90 (1.1%)",
+   "recall_by_type": {
+    "date_patch": "18/18",
+    "photo_patch": "0/18",
+    "stamp_clone": "0/18",
+    "text_patch": "0/18"
+   },
+   "false_alarms_by_condition": {
+    "combo_worst": "1/6"
+   }
+  },
+  "tamper_pixel_model_only": {
+   "auc": 0.6537,
+   "recall": 0.0,
+   "false_alarm_rate": 0.0
+  },
+  "mean_secs_per_document": 1.219,
+  "original_system": {
+   "description": "Original build 2026.09.16.06-VERIFIED-MRZ measured on the same legacy samples before any changes (Tesseract-only OCR, ELA heuristics).",
+   "mrz_exact_readable": "48/156 (30.8%)",
+   "mrz_exact_all": "48/162",
+   "tamper_recall": "0/72",
+   "tamper_false_alarms": "6/90",
+   "mean_secs_per_document": 9.52,
+   "acceptance_script": "FAIL (2 of 3 reference samples unreadable)",
+   "pytest": "1 failed, 4 passed",
+   "security_issues": [
+    "MRZ repair rebuilt check digits, so a forged MRZ with a stale composite digit was reported valid",
+    "Upload handler wrote to /tmp/<client filename> (path traversal)"
+   ]
+  }
+ },
+ "synthetic_capture": {
+  "results": {
+   "all": {
+    "documents": 150,
+    "classification": 96.7,
+    "mrz_exact": 77.5,
+    "field_accuracy": 60.9
+   },
+   "driving_licence": {
+    "documents": 30,
+    "classification": 93.3,
+    "mrz_exact": null,
+    "field_accuracy": 19.3
+   },
+   "holdout_font": {
+    "documents": 0,
+    "classification": null,
+    "mrz_exact": 83.3,
+    "field_accuracy": null
+   },
+   "national_id": {
+    "documents": 30,
+    "classification": 96.7,
+    "mrz_exact": 70.0,
+    "field_accuracy": 77.1
+   },
+   "passport": {
+    "documents": 30,
+    "classification": 96.7,
+    "mrz_exact": 86.7,
+    "field_accuracy": 75.8
+   },
+   "residence_permit": {
+    "documents": 30,
+    "classification": 100.0,
+    "mrz_exact": 73.3,
+    "field_accuracy": 66.7
+   },
+   "severity_0": {
+    "documents": 43,
+    "classification": 97.7,
+    "mrz_exact": 94.1,
+    "field_accuracy": 82.1
+   },
+   "severity_1": {
+    "documents": 29,
+    "classification": 100.0,
+    "mrz_exact": 86.4,
+    "field_accuracy": 66.8
+   },
+   "severity_2": {
+    "documents": 39,
+    "classification": 100.0,
+    "mrz_exact": 69.7,
+    "field_accuracy": 49.3
+   },
+   "severity_3": {
+    "documents": 39,
+    "classification": 89.7,
+    "mrz_exact": 61.3,
+    "field_accuracy": 43.9
+   },
+   "train_font": {
+    "documents": 0,
+    "classification": null,
+    "mrz_exact": 71.7,
+    "field_accuracy": null
+   },
+   "visa": {
+    "documents": 30,
+    "classification": 96.7,
+    "mrz_exact": 80.0,
+    "field_accuracy": 63.1
+   }
+  },
+  "latency_ms": {
+   "p50": 1051,
+   "p95": 1640
+  }
+ }
+}

@@ -1,0 +1,90 @@
+{
+  "tesseract": "C:\\Program Files\\Tesseract-OCR\\tesseract.exe",
+  "mode": "acceptance",
+  "tests": [
+    {
+      "file": "samples/generated/identity_01_00_good.jpg",
+      "confidence": 100.0,
+      "mrz_valid": true,
+      "mrz_check": true,
+      "mrz_raw_check": true,
+      "repairs": [],
+      "quality": {
+        "width": 1800,
+        "height": 1150,
+        "blur_score": 1462.33,
+        "brightness": 218.55,
+        "contrast": 42.24,
+        "glare_ratio": 0.0,
+        "noise_score": 12.21,
+        "clipped_ratio": 0.0,
+        "document_quad_found": false,
+        "quality_score": 85.15,
+        "warnings": []
+      },
+      "warnings": [],
+      "elapsed_ms": 667,
+      "fields": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_01_low_light.jpg",
+      "confidence": 100.0,
+      "mrz_valid": true,
+      "mrz_check": true,
+      "mrz_raw_check": true,
+      "repairs": [],
+      "quality": {
+        "width": 1800,
+        "height": 1150,
+        "blur_score": 335.44,
+        "brightness": 94.21,
+        "contrast": 20.86,
+        "glare_ratio": 0.0,
+        "noise_score": 5.79,
+        "clipped_ratio": 0.0115,
+        "document_quad_found": false,
+        "quality_score": 91.37,
+        "warnings": []
+      },
+      "warnings": [],
+      "elapsed_ms": 196,
+      "fields": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_text_patch_low_light.jpg",
+      "confidence": 100.0,
+      "mrz_valid": true,
+      "mrz_check": true,
+      "mrz_raw_check": true,
+      "repairs": [],
+      "quality": {
+        "width": 1800,
+        "height": 1150,
+        "blur_score": 338.77,
+        "brightness": 94.1,
+        "contrast": 20.94,
+        "glare_ratio": 0.0,
+        "noise_score": 5.8,
+        "clipped_ratio": 0.01139,
+        "document_quad_found": false,
+        "quality_score": 91.35,
+        "warnings": []
+      },
+      "warnings": [],
+      "elapsed_ms": 175,
+      "fields": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    }
+  ]
+}

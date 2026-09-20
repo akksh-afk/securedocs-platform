@@ -1,0 +1,93 @@
+{
+ "disclaimer": "Synthetic, watermarked test documents only.",
+ "samples": [
+  {
+   "file": "samples/demo/passport_genuine_scan.jpg",
+   "notes": "Genuine passport, flat scan."
+  },
+  {
+   "file": "samples/demo/passport_genuine_phone.jpg",
+   "notes": "Genuine passport, phone capture with glare."
+  },
+  {
+   "file": "samples/demo/visa_genuine_scan.jpg",
+   "notes": "Genuine visa, flat scan."
+  },
+  {
+   "file": "samples/demo/visa_genuine_phone.jpg",
+   "notes": "Genuine visa, phone capture with glare."
+  },
+  {
+   "file": "samples/demo/national_id_genuine_scan.jpg",
+   "notes": "Genuine national_id, flat scan."
+  },
+  {
+   "file": "samples/demo/national_id_genuine_phone.jpg",
+   "notes": "Genuine national_id, phone capture with glare."
+  },
+  {
+   "file": "samples/demo/driving_licence_genuine_scan.jpg",
+   "notes": "Genuine driving_licence, flat scan."
+  },
+  {
+   "file": "samples/demo/driving_licence_genuine_phone.jpg",
+   "notes": "Genuine driving_licence, phone capture with glare."
+  },
+  {
+   "file": "samples/demo/residence_permit_genuine_scan.jpg",
+   "notes": "Genuine residence_permit, flat scan."
+  },
+  {
+   "file": "samples/demo/residence_permit_genuine_phone.jpg",
+   "notes": "Genuine residence_permit, phone capture with glare."
+  },
+  {
+   "file": "samples/demo/forged_photo_replace.jpg",
+   "notes": "Forgery: {'type': 'photo_replace', 'style': 'feather', 'box': [59, 207, 439, 687]}"
+  },
+  {
+   "file": "samples/demo/forged_date_replace.jpg",
+   "notes": "Forgery: {'type': 'date_replace', 'field': 'date_of_expiry', 'old': '2032-03-09', 'new': '2040-03-07', 'erase': 'background', 'skilled': False, 'box': [932, 669, 1129, 703]}"
+  },
+  {
+   "file": "samples/demo/forged_stamp_clone.jpg",
+   "notes": "Forgery: {'type': 'stamp_clone', 'source': [985, 170, 1230, 415], 'box': [1005, 353, 1250, 598]}"
+  },
+  {
+   "file": "samples/demo/forged_stamp_forge.jpg",
+   "notes": "Forgery: {'type': 'stamp_forge', 'style': 'flat_ink', 'box': [1023, 525, 1235, 737]}"
+  },
+  {
+   "file": "samples/demo/forged_mrz_edit.jpg",
+   "notes": "Forgery: {'type': 'mrz_edit', 'field': 'date_of_birth', 'old': '600205', 'new': '600435', 'check_digit_recomputed': False, 'box': [562, 918, 630, 959]}"
+  },
+  {
+   "file": "samples/demo/forged_legacy_patch.jpg",
+   "notes": "Forgery: {'type': 'legacy_patch', 'field': 'document_number', 'old': 'QXR57732D', 'new': 'QXR97732G', 'box': [464, 219, 814, 296]}"
+  },
+  {
+   "file": "samples/demo/pair_passport.jpg",
+   "notes": "Passport presented with pair_visa.jpg."
+  },
+  {
+   "file": "samples/demo/pair_visa.jpg",
+   "notes": "Visa linked to pair_passport.jpg."
+  },
+  {
+   "file": "samples/demo/pair_visa_other_person.jpg",
+   "notes": "Visa belonging to someone else: the link check fails with pair_passport.jpg."
+  },
+  {
+   "file": "samples/demo/passport_expired.jpg",
+   "notes": "Expired passport."
+  },
+  {
+   "file": "samples/demo/face_passport.jpg",
+   "notes": "Passport with a real face photo (public matplotlib sample image) pasted over the synthetic portrait, for face matching. The pixel forgery model may flag the pasted photo."
+  },
+  {
+   "file": "samples/demo/face_live_same_person.jpg",
+   "notes": "Live capture matching face_passport.jpg."
+  }
+ ]
+}

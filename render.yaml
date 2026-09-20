@@ -1,0 +1,90 @@
+# ---------------------------------------------------------------
+# One-click deploy to Render, to get a public URL.
+#
+#   1. Push this repository to GitHub (already done)
+#   2. render.com -> New -> Blueprint -> pick this repository
+#   3. Set MASTER_KEY when prompted (see below)
+#   4. Wait for the build, then open the URL Render gives you
+#
+# Everything else - the database, the connection string, the port - is
+# wired up automatically by this file.
+#
+# READ THIS BEFORE DEPLOYING: a public URL means anyone with the link
+# can reach the sign-in page, and the seeded demo accounts have a known
+# password. See DEPLOY.md before sharing the link outside your team.
+# ---------------------------------------------------------------
+
+databases:
+  - name: securedocs-db
+    databaseName: sih_dms
+    user: securedocs
+    plan: free
+
+services:
+  - type: web
+    name: securedocs
+    runtime: node
+    plan: free
+    # Build the screens, install the server, prepare the database.
+    buildCommand: >
+      cd frontend && npm ci && npm run build &&
+      cd ../backend && npm ci &&
+      node scripts/db-setup.js &&
+      node scripts/seed.js || true
+    startCommand: node backend/server.js
+    healthCheckPath: /api/v1/me
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: securedocs-db
+          property: connectionString
+
+      # Generated once by Render and then left alone. Changing it makes
+      # every document already uploaded permanently unreadable.
+      - key: MASTER_KEY
+        generateValue: true
+
+      # The free plan has no separate background worker, so the text
+      # reader runs inside the web process. Move it to its own service
+      # on a paid plan - see DEPLOY.md.
+      - key: RUN_WORKER_INLINE
+        value: "true"
+
+      - key: NODE_ENV
+        value: production
+
+      # WARNING: free instances have no persistent disk, so uploaded
+      # files are lost whenever the instance restarts. The database
+      # record survives, so those documents will then fail verification.
+      # Set STORAGE_BACKEND=minio with real credentials for anything
+      # that needs to keep its files.
+      - key: STORAGE_BACKEND
+        value: disk
+
+      - key: LEDGER_BACKEND
+        value: stub
+
+      # Render terminates TLS at one proxy in front of this process, so
+      # one X-Forwarded-For hop is trustworthy. Without this the app
+      # trusts no hop and rate-limits every request as one address.
+      - key: TRUST_PROXY_HOPS
+        value: "1"
+
+      # Sign-in codes need a real gateway. Set this and the Twilio
+      # credentials in the Render dashboard; until then, mobile sign-in
+      # cannot send a code. The console provider refuses in production
+      # rather than printing codes into the service log.
+      - key: SMS_PROVIDER
+        sync: false
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_FROM
+        sync: false
+
+      - key: REDACTION_ENABLED
+        value: "false"
+
+      - key: OCR_LANGS
+        value: eng

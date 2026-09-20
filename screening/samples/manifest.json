@@ -1,0 +1,2510 @@
+{
+  "dataset_name": "SIH26188_robust_capture_synthetic_v2",
+  "disclaimer": "All images are synthetic test data. CCTNS-style samples are not official CCTNS records; identity documents are not valid government documents.",
+  "samples": [
+    {
+      "file": "samples/generated/identity_01_00_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_01_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_02_overexposed.jpg",
+      "family": "identity",
+      "capture_condition": "overexposed",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_03_motion_blur.jpg",
+      "family": "identity",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_04_defocus.jpg",
+      "family": "identity",
+      "capture_condition": "defocus",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_05_tiny.jpg",
+      "family": "identity",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_06_perspective.jpg",
+      "family": "identity",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_07_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_08_noise.jpg",
+      "family": "identity",
+      "capture_condition": "noise",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_09_jpeg.jpg",
+      "family": "identity",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_10_shadow.jpg",
+      "family": "identity",
+      "capture_condition": "shadow",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_11_partial.jpg",
+      "family": "identity",
+      "capture_condition": "partial",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_12_rotate180.jpg",
+      "family": "identity",
+      "capture_condition": "rotate180",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_13_combo_worst.jpg",
+      "family": "identity",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_14_occluded_glare.jpg",
+      "family": "identity",
+      "capture_condition": "occluded_glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_text_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_text_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_text_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_photo_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_photo_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_photo_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_stamp_clone_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_stamp_clone_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_stamp_clone_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_date_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_date_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_01_date_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "K71M4P829",
+        "date_of_birth": "020214",
+        "date_of_expiry": "350918"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_00_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_01_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_02_overexposed.jpg",
+      "family": "identity",
+      "capture_condition": "overexposed",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_03_motion_blur.jpg",
+      "family": "identity",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_04_defocus.jpg",
+      "family": "identity",
+      "capture_condition": "defocus",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_05_tiny.jpg",
+      "family": "identity",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_06_perspective.jpg",
+      "family": "identity",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_07_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_08_noise.jpg",
+      "family": "identity",
+      "capture_condition": "noise",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_09_jpeg.jpg",
+      "family": "identity",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_10_shadow.jpg",
+      "family": "identity",
+      "capture_condition": "shadow",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_11_partial.jpg",
+      "family": "identity",
+      "capture_condition": "partial",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_12_rotate180.jpg",
+      "family": "identity",
+      "capture_condition": "rotate180",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_13_combo_worst.jpg",
+      "family": "identity",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_14_occluded_glare.jpg",
+      "family": "identity",
+      "capture_condition": "occluded_glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_text_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_text_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_text_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_photo_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_photo_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_photo_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_stamp_clone_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_stamp_clone_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_stamp_clone_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_date_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_date_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_02_date_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "P93Z6N417",
+        "date_of_birth": "990708",
+        "date_of_expiry": "341201"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_00_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_01_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_02_overexposed.jpg",
+      "family": "identity",
+      "capture_condition": "overexposed",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_03_motion_blur.jpg",
+      "family": "identity",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_04_defocus.jpg",
+      "family": "identity",
+      "capture_condition": "defocus",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_05_tiny.jpg",
+      "family": "identity",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_06_perspective.jpg",
+      "family": "identity",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_07_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_08_noise.jpg",
+      "family": "identity",
+      "capture_condition": "noise",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_09_jpeg.jpg",
+      "family": "identity",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_10_shadow.jpg",
+      "family": "identity",
+      "capture_condition": "shadow",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_11_partial.jpg",
+      "family": "identity",
+      "capture_condition": "partial",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_12_rotate180.jpg",
+      "family": "identity",
+      "capture_condition": "rotate180",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_13_combo_worst.jpg",
+      "family": "identity",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_14_occluded_glare.jpg",
+      "family": "identity",
+      "capture_condition": "occluded_glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_text_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_text_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_text_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_photo_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_photo_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_photo_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_stamp_clone_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_stamp_clone_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_stamp_clone_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_date_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_date_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_03_date_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "L5Q8D2173",
+        "date_of_birth": "850923",
+        "date_of_expiry": "301106"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_00_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_01_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_02_overexposed.jpg",
+      "family": "identity",
+      "capture_condition": "overexposed",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_03_motion_blur.jpg",
+      "family": "identity",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_04_defocus.jpg",
+      "family": "identity",
+      "capture_condition": "defocus",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_05_tiny.jpg",
+      "family": "identity",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_06_perspective.jpg",
+      "family": "identity",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_07_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_08_noise.jpg",
+      "family": "identity",
+      "capture_condition": "noise",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_09_jpeg.jpg",
+      "family": "identity",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_10_shadow.jpg",
+      "family": "identity",
+      "capture_condition": "shadow",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_11_partial.jpg",
+      "family": "identity",
+      "capture_condition": "partial",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_12_rotate180.jpg",
+      "family": "identity",
+      "capture_condition": "rotate180",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_13_combo_worst.jpg",
+      "family": "identity",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_14_occluded_glare.jpg",
+      "family": "identity",
+      "capture_condition": "occluded_glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_text_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_text_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_text_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_photo_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_photo_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_photo_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_stamp_clone_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_stamp_clone_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_stamp_clone_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_date_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_date_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_04_date_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "A64X8R205",
+        "date_of_birth": "970331",
+        "date_of_expiry": "290622"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_00_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_01_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_02_overexposed.jpg",
+      "family": "identity",
+      "capture_condition": "overexposed",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_03_motion_blur.jpg",
+      "family": "identity",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_04_defocus.jpg",
+      "family": "identity",
+      "capture_condition": "defocus",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_05_tiny.jpg",
+      "family": "identity",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_06_perspective.jpg",
+      "family": "identity",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_07_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_08_noise.jpg",
+      "family": "identity",
+      "capture_condition": "noise",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_09_jpeg.jpg",
+      "family": "identity",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_10_shadow.jpg",
+      "family": "identity",
+      "capture_condition": "shadow",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_11_partial.jpg",
+      "family": "identity",
+      "capture_condition": "partial",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_12_rotate180.jpg",
+      "family": "identity",
+      "capture_condition": "rotate180",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_13_combo_worst.jpg",
+      "family": "identity",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_14_occluded_glare.jpg",
+      "family": "identity",
+      "capture_condition": "occluded_glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_text_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_text_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_text_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_photo_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_photo_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_photo_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_stamp_clone_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_stamp_clone_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_stamp_clone_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_date_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_date_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_05_date_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "N82B7K564",
+        "date_of_birth": "910411",
+        "date_of_expiry": "330909"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_00_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_01_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_02_overexposed.jpg",
+      "family": "identity",
+      "capture_condition": "overexposed",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_03_motion_blur.jpg",
+      "family": "identity",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_04_defocus.jpg",
+      "family": "identity",
+      "capture_condition": "defocus",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_05_tiny.jpg",
+      "family": "identity",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_06_perspective.jpg",
+      "family": "identity",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_07_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_08_noise.jpg",
+      "family": "identity",
+      "capture_condition": "noise",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_09_jpeg.jpg",
+      "family": "identity",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_10_shadow.jpg",
+      "family": "identity",
+      "capture_condition": "shadow",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_11_partial.jpg",
+      "family": "identity",
+      "capture_condition": "partial",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_12_rotate180.jpg",
+      "family": "identity",
+      "capture_condition": "rotate180",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_13_combo_worst.jpg",
+      "family": "identity",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_14_occluded_glare.jpg",
+      "family": "identity",
+      "capture_condition": "occluded_glare",
+      "tampered": false,
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230",
+        "nationality": "UTO"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_text_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_text_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_text_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "text_patch",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_photo_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_photo_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_photo_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "photo_patch",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_stamp_clone_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_stamp_clone_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_stamp_clone_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "stamp_clone",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_date_patch_good.jpg",
+      "family": "identity",
+      "capture_condition": "good",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_date_patch_low_light.jpg",
+      "family": "identity",
+      "capture_condition": "low_light",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/identity_06_date_patch_glare.jpg",
+      "family": "identity",
+      "capture_condition": "glare",
+      "tampered": true,
+      "tamper_type": "date_patch",
+      "expected": {
+        "passport_number": "T49C2M781",
+        "date_of_birth": "001129",
+        "date_of_expiry": "361230"
+      }
+    },
+    {
+      "file": "samples/generated/cctns_style_01_00_good.jpg",
+      "family": "cctns_style",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_01_01_tiny.jpg",
+      "family": "cctns_style",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_01_02_low_light.jpg",
+      "family": "cctns_style",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_01_03_motion_blur.jpg",
+      "family": "cctns_style",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_01_04_perspective.jpg",
+      "family": "cctns_style",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_01_05_jpeg.jpg",
+      "family": "cctns_style",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_01_06_glare.jpg",
+      "family": "cctns_style",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_01_07_combo_worst.jpg",
+      "family": "cctns_style",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_02_00_good.jpg",
+      "family": "cctns_style",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_02_01_tiny.jpg",
+      "family": "cctns_style",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_02_02_low_light.jpg",
+      "family": "cctns_style",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_02_03_motion_blur.jpg",
+      "family": "cctns_style",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_02_04_perspective.jpg",
+      "family": "cctns_style",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_02_05_jpeg.jpg",
+      "family": "cctns_style",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_02_06_glare.jpg",
+      "family": "cctns_style",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_02_07_combo_worst.jpg",
+      "family": "cctns_style",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_03_00_good.jpg",
+      "family": "cctns_style",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_03_01_tiny.jpg",
+      "family": "cctns_style",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_03_02_low_light.jpg",
+      "family": "cctns_style",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_03_03_motion_blur.jpg",
+      "family": "cctns_style",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_03_04_perspective.jpg",
+      "family": "cctns_style",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_03_05_jpeg.jpg",
+      "family": "cctns_style",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_03_06_glare.jpg",
+      "family": "cctns_style",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_03_07_combo_worst.jpg",
+      "family": "cctns_style",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_04_00_good.jpg",
+      "family": "cctns_style",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_04_01_tiny.jpg",
+      "family": "cctns_style",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_04_02_low_light.jpg",
+      "family": "cctns_style",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_04_03_motion_blur.jpg",
+      "family": "cctns_style",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_04_04_perspective.jpg",
+      "family": "cctns_style",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_04_05_jpeg.jpg",
+      "family": "cctns_style",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_04_06_glare.jpg",
+      "family": "cctns_style",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_04_07_combo_worst.jpg",
+      "family": "cctns_style",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_05_00_good.jpg",
+      "family": "cctns_style",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_05_01_tiny.jpg",
+      "family": "cctns_style",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_05_02_low_light.jpg",
+      "family": "cctns_style",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_05_03_motion_blur.jpg",
+      "family": "cctns_style",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_05_04_perspective.jpg",
+      "family": "cctns_style",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_05_05_jpeg.jpg",
+      "family": "cctns_style",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_05_06_glare.jpg",
+      "family": "cctns_style",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_05_07_combo_worst.jpg",
+      "family": "cctns_style",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_06_00_good.jpg",
+      "family": "cctns_style",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_06_01_tiny.jpg",
+      "family": "cctns_style",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_06_02_low_light.jpg",
+      "family": "cctns_style",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_06_03_motion_blur.jpg",
+      "family": "cctns_style",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_06_04_perspective.jpg",
+      "family": "cctns_style",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_06_05_jpeg.jpg",
+      "family": "cctns_style",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_06_06_glare.jpg",
+      "family": "cctns_style",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_06_07_combo_worst.jpg",
+      "family": "cctns_style",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_07_00_good.jpg",
+      "family": "cctns_style",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_07_01_tiny.jpg",
+      "family": "cctns_style",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_07_02_low_light.jpg",
+      "family": "cctns_style",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_07_03_motion_blur.jpg",
+      "family": "cctns_style",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_07_04_perspective.jpg",
+      "family": "cctns_style",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_07_05_jpeg.jpg",
+      "family": "cctns_style",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_07_06_glare.jpg",
+      "family": "cctns_style",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_07_07_combo_worst.jpg",
+      "family": "cctns_style",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_08_00_good.jpg",
+      "family": "cctns_style",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_08_01_tiny.jpg",
+      "family": "cctns_style",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_08_02_low_light.jpg",
+      "family": "cctns_style",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_08_03_motion_blur.jpg",
+      "family": "cctns_style",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_08_04_perspective.jpg",
+      "family": "cctns_style",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_08_05_jpeg.jpg",
+      "family": "cctns_style",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_08_06_glare.jpg",
+      "family": "cctns_style",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_08_07_combo_worst.jpg",
+      "family": "cctns_style",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_09_00_good.jpg",
+      "family": "cctns_style",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_09_01_tiny.jpg",
+      "family": "cctns_style",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_09_02_low_light.jpg",
+      "family": "cctns_style",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_09_03_motion_blur.jpg",
+      "family": "cctns_style",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_09_04_perspective.jpg",
+      "family": "cctns_style",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_09_05_jpeg.jpg",
+      "family": "cctns_style",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_09_06_glare.jpg",
+      "family": "cctns_style",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_09_07_combo_worst.jpg",
+      "family": "cctns_style",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_10_00_good.jpg",
+      "family": "cctns_style",
+      "capture_condition": "good",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_10_01_tiny.jpg",
+      "family": "cctns_style",
+      "capture_condition": "tiny",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_10_02_low_light.jpg",
+      "family": "cctns_style",
+      "capture_condition": "low_light",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_10_03_motion_blur.jpg",
+      "family": "cctns_style",
+      "capture_condition": "motion_blur",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_10_04_perspective.jpg",
+      "family": "cctns_style",
+      "capture_condition": "perspective",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_10_05_jpeg.jpg",
+      "family": "cctns_style",
+      "capture_condition": "jpeg",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_10_06_glare.jpg",
+      "family": "cctns_style",
+      "capture_condition": "glare",
+      "tampered": false,
+      "expected": {}
+    },
+    {
+      "file": "samples/generated/cctns_style_10_07_combo_worst.jpg",
+      "family": "cctns_style",
+      "capture_condition": "combo_worst",
+      "tampered": false,
+      "expected": {}
+    }
+  ]
+}

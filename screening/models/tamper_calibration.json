@@ -1,0 +1,26 @@
+{
+ "image_threshold": 0.9942655563354492,
+ "region_threshold": 0.5,
+ "target_fpr": 0.03,
+ "val_metrics": {
+  "auc": 0.7432018491721948,
+  "pixel_iou": 0.31130013727938427,
+  "recall_at_fpr1": 0.21957040572792363,
+  "threshold_at_fpr1": 0.9981274008750916,
+  "recall_at_fpr3": 0.33890214797136037,
+  "threshold_at_fpr3": 0.9942655563354492,
+  "recall_by_op_at_fpr3": {
+   "date_replace": 0.132,
+   "glyph_copy_move": 0.096,
+   "legacy_patch": 0.914,
+   "mrz_edit": 0.094,
+   "photo_replace": 0.623,
+   "stamp_clone": 0.338,
+   "stamp_forge": 0.38,
+   "text_replace": 0.14
+  },
+  "recall_at_fpr5": 0.4009546539379475,
+  "threshold_at_fpr5": 0.9912328124046326
+ },
+ "note": "Thresholds calibrated on synthetic validation documents; recalibrate on real data before deployment."
+}

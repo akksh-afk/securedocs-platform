@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+outputs/*.tmp
+# Generated training datasets (several GB; rebuild with the training/ scripts)
+data/mrz_lines*/
+data/tamper*/
+# Runtime state: registry database and audit trail contain personal data
+data/registry.sqlite*
+data/audit_log.jsonl

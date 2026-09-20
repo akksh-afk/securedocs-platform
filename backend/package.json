@@ -1,0 +1,46 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "worker": "node worker/ocr-worker.js",
+    "init:minio": "node scripts/init-minio.js",
+    "test": "node test/services.test.js",
+    "test:ocr": "node test/ocr.test.js",
+    "test:integration": "node test/integration.test.js",
+    "db:setup": "node scripts/db-setup.js",
+    "preflight": "node scripts/preflight.js",
+    "code": "node scripts/demo-code.js",
+    "seed": "node scripts/seed.js",
+    "seed:scan": "node scripts/seed-scan.js",
+    "tamper": "node scripts/tamper.js",
+    "integrity:check": "node scripts/integrity-check.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1127.0",
+    "@grpc/grpc-js": "^1.14.4",
+    "@hyperledger/fabric-gateway": "^1.12.1",
+    "@napi-rs/canvas": "^1.0.8",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jimp": "^1.6.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.3.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.3.289",
+    "pg": "^8.23.0",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

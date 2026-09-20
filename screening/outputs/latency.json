@@ -1,0 +1,16 @@
+{
+ "cuda": {
+  "device": "cuda",
+  "documents": 30,
+  "p50_ms": 1425,
+  "p95_ms": 2081,
+  "mean_ms": 1500
+ },
+ "cpu": {
+  "device": "cpu",
+  "documents": 20,
+  "p50_ms": 2492,
+  "p95_ms": 3159,
+  "mean_ms": 2606
+ }
+}

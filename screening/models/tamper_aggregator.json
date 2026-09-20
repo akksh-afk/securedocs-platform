@@ -1,0 +1,39 @@
+{
+ "features": [
+  "max_blur7",
+  "max_blur21",
+  "top100_mean",
+  "top1000_mean",
+  "top10000_mean",
+  "area_gt50",
+  "area_gt80",
+  "area_gt95",
+  "largest_comp_area",
+  "largest_comp_mean",
+  "n_comps",
+  "mean_prob"
+ ],
+ "test_documents": 600,
+ "aggregator": {
+  "test_auc": 0.7661,
+  "threshold": 0.8353,
+  "test_recall": 0.271,
+  "test_false_alarm_rate": 0.016,
+  "test_recall_by_type": {
+   "date_replace": 0.15,
+   "glyph_copy_move": 0.062,
+   "legacy_patch": 0.526,
+   "mrz_edit": 0.133,
+   "photo_replace": 0.765,
+   "stamp_clone": 0.28,
+   "stamp_forge": 0.442,
+   "text_replace": 0.106
+  }
+ },
+ "max_pixel_baseline": {
+  "test_auc": 0.7397,
+  "test_recall": 0.339,
+  "test_false_alarm_rate": 0.026
+ },
+ "note": "Threshold chosen for a 3% false-alarm rate on the validation split; figures are on the unseen test split."
+}

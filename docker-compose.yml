@@ -1,0 +1,126 @@
+# ---------------------------------------------------------------
+# The whole system with one command, on any machine with Docker.
+#
+#   docker compose up
+#   open http://localhost:5000      the evidence system
+#   open http://localhost:8000      the screening service's own console
+#
+# This brings up the database and the write-once file store as well, so
+# nothing has to be installed beforehand. Everything keeps its data in
+# named volumes, so stopping and starting does not lose anything.
+# ---------------------------------------------------------------
+
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sih_dms
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      # The app must not start before the database can answer.
+      test: ["CMD-SHELL", "pg_isready -U postgres -d sih_dms"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # Write-once object storage. Documents belong here rather than on the
+  # container filesystem, which is wiped on every restart.
+  storage:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9001:9001"        # the storage admin console, not the app
+    volumes:
+      - storage-data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+      storage:
+        condition: service_healthy
+      screening:
+        condition: service_started
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/sih_dms
+      # Demo key. Generate your own for anything real:
+      #   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+      MASTER_KEY: ${MASTER_KEY:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      PORT: 5000
+      STORAGE_BACKEND: minio
+      MINIO_ENDPOINT: http://storage:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      MINIO_BUCKET: securedocs
+      LEDGER_BACKEND: stub
+      REDACTION_ENABLED: "false"
+      OCR_LANGS: eng+hin
+      SMS_PROVIDER: console
+      # The seam: an identity document filed as evidence is sent here,
+      # and the verdict lands on that case's audit trail. Unset it and
+      # uploads are simply recorded as not screened.
+      SCREENING_URL: http://screening:8000
+    volumes:
+      - tesseract-cache:/app/backend/.tesseract
+    command: >
+      sh -c "node scripts/init-minio.js || true;
+             npm run --prefix . db:setup --silent || node scripts/db-setup.js;
+             node scripts/seed.js || true;
+             node server.js"
+    working_dir: /app/backend
+
+  # The text reader, as its own process the way it is meant to run.
+  worker:
+    build: .
+    depends_on:
+      app:
+        condition: service_started
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/sih_dms
+      MASTER_KEY: ${MASTER_KEY:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      STORAGE_BACKEND: minio
+      MINIO_ENDPOINT: http://storage:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      MINIO_BUCKET: securedocs
+      OCR_LANGS: eng+hin
+    volumes:
+      - tesseract-cache:/app/backend/.tesseract
+    working_dir: /app/backend
+    command: node worker/ocr-worker.js
+
+  # ---------------------------------------------------------------
+  # The fake-identity screening service: FastAPI, PyTorch on CPU and
+  # Tesseract, with the trained MRZ reader and forgery models.
+  #
+  # It keeps its own watchlist and audit database in a volume, and it
+  # is reachable from the evidence system as http://screening:8000.
+  # First build pulls PyTorch, so expect it to take a few minutes.
+  # ---------------------------------------------------------------
+  screening:
+    build: ./screening
+    ports:
+      - "8000:8000"
+    environment:
+      SCREENING_DATA_DIR: /data
+    volumes:
+      - screening-data:/data
+
+volumes:
+  db-data:
+  storage-data:
+  tesseract-cache:
+  screening-data:

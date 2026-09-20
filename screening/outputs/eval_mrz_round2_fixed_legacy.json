@@ -1,0 +1,155 @@
+{
+ "legacy": {
+  "all": "151/162",
+  "excluding_mrz_covered": "151/156",
+  "rate_excluding_covered": 0.9679,
+  "mean_secs": 0.196,
+  "by_condition": {
+   "combo_worst": "6/6",
+   "defocus": "6/6",
+   "glare": "6/6",
+   "good": "6/6",
+   "jpeg": "6/6",
+   "low_light": "6/6",
+   "motion_blur": "1/6",
+   "noise": "6/6",
+   "occluded_glare": "6/6",
+   "overexposed": "6/6",
+   "partial": "0/6",
+   "perspective": "6/6",
+   "rotate180": "6/6",
+   "shadow": "6/6",
+   "tampered_glare": "24/24",
+   "tampered_good": "24/24",
+   "tampered_low_light": "24/24",
+   "tiny": "6/6"
+  },
+  "failures": [
+   {
+    "file": "samples/generated/identity_01_03_motion_blur.jpg",
+    "ok": false,
+    "secs": 0.55,
+    "lines": [
+     "P<UTOGUPTA<<AKSHIT<<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "K71M4P8294UTO8202147M3509180<<<<<<<<<<<<<<8B"
+    ],
+    "repairs": [
+     "composite_check[0] B->8"
+    ]
+   },
+   {
+    "file": "samples/generated/identity_01_11_partial.jpg",
+    "ok": false,
+    "secs": 0.64,
+    "lines": [
+     "C<<<EEQV<<<<<C<JPSPI<<<<LU<<<<<<<<<<",
+     "Z<<ZED<<<<CQS<<UNTH<<<<CQ<<NMZ2<<<<<"
+    ],
+    "repairs": [
+     "date_of_birth[2] U->0",
+     "date_of_birth[4] T->1",
+     "date_of_expiry[3] Q->0"
+    ]
+   },
+   {
+    "file": "samples/generated/identity_02_03_motion_blur.jpg",
+    "ok": false,
+    "secs": 0.53,
+    "lines": [
+     "P<UTOSINGH<<RHEA<ANIKA<<<<<<<<<<<<<<<<<<<<<<",
+     "P95Z6N4179UTO9907887F3412019<<<<<<<<<<<<<<04"
+    ],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_02_11_partial.jpg",
+    "ok": false,
+    "secs": 0.46,
+    "lines": [
+     "C<BEZSQ<<<<<C<<O0O<<<<<LQ<<22<<<<<<<",
+     "E<<ZED<<<<CQS<<COD<<<<<CQ<<LLA<<<<<<"
+    ],
+    "repairs": [
+     "date_of_birth[3] O->0",
+     "date_of_birth[4] D->0",
+     "date_of_expiry[3] Q->0",
+     "date_of_expiry_check[0] L->1",
+     "name[11] 0->O",
+     "name[22] 2->Z",
+     "name[23] 2->Z"
+    ]
+   },
+   {
+    "file": "samples/generated/identity_03_03_motion_blur.jpg",
+    "ok": false,
+    "secs": 0.56,
+    "lines": [
+     "P<UTOMEHTA<<VIKRAM<<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "L5Q8021736UTO8509253M3011065<<<<<<<<<<<<<<06"
+    ],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_03_11_partial.jpg",
+    "ok": false,
+    "secs": 0.59,
+    "lines": [
+     "<<I<ZZZT<I<G2<<<<HD<O<<CO<<<<CTZ<<2<",
+     "<NZDG<<<<TDT1<<<<<<<CVN<<7TS<<<<NA<<"
+    ],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_04_11_partial.jpg",
+    "ok": false,
+    "secs": 0.34,
+    "lines": [],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_05_03_motion_blur.jpg",
+    "ok": false,
+    "secs": 0.41,
+    "lines": [
+     "P<UTOSHARMA<<DEV<RAJ<<<<<<<<<<<<<<<<<<<<<<<<",
+     "N82B7K5642UTO9104118M3309092<<<<<<<<<<<<<<80"
+    ],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_05_11_partial.jpg",
+    "ok": false,
+    "secs": 0.29,
+    "lines": [],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_06_03_motion_blur.jpg",
+    "ok": false,
+    "secs": 0.59,
+    "lines": [
+     "P<UTOPARKER<<ELEWA<<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "T49C2M7818UTO8011293F3612385<<<<<<<<<<<<<<88"
+    ],
+    "repairs": []
+   },
+   {
+    "file": "samples/generated/identity_06_11_partial.jpg",
+    "ok": false,
+    "secs": 0.6,
+    "lines": [
+     "A<<<TTT<<CQO<<<<HD<D<<CO<<<<<I<CTZZ<",
+     "<<T<A<<<TT1<<<<<<<ZOZCN<<TSV<<<<N<<<"
+    ],
+    "repairs": [
+     "document_number_check[0] T->1",
+     "nationality[0] 1->I",
+     "date_of_birth[5] Z->2",
+     "date_of_birth_check[0] O->0",
+     "date_of_expiry[4] T->1",
+     "date_of_expiry[5] S->5"
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,53 @@
+{
+  "policy_version": "2026.09-sih26188-v1",
+  "description": "Screening policy shared by all checkpoints. Changing a value here changes decisions everywhere, and every decision records this version.",
+  "validation": {
+    "passport_min_validity_days_on_entry": 180,
+    "expiry_warning_days": 180,
+    "max_age_years": 120,
+    "min_driving_age_years": 16,
+    "max_validity_years": {"passport": 10, "visa": 10, "national_id": 15, "driving_licence": 20, "residence_permit": 10},
+    "document_number_patterns": {
+      "passport": "^[A-Z0-9]{6,9}$",
+      "visa": "^[A-Z0-9]{6,9}$",
+      "national_id": "^[A-Z0-9]{6,9}$",
+      "residence_permit": "^[A-Z0-9]{6,9}$",
+      "driving_licence": "^[A-Z0-9]{8,20}$"
+    },
+    "name_match_pass": 90,
+    "name_match_fail": 70
+  },
+  "face": {
+    "cosine_match_threshold": 0.363,
+    "cosine_inconclusive_floor": 0.30,
+    "min_face_px": 48,
+    "registry_duplicate_threshold": 0.60,
+    "registry_min_detection_score": 0.85
+  },
+  "tampering": {
+    "pixel_region_threshold": 0.5,
+    "pixel_image_threshold": 0.5,
+    "min_region_area_ratio": 0.0004
+  },
+  "risk": {
+    "weights": {
+      "critical": 60,
+      "high": 30,
+      "medium": 14,
+      "low": 5,
+      "info": 0
+    },
+    "category_caps": {
+      "watchlist": 100,
+      "identity": 100,
+      "integrity": 80,
+      "tampering": 80,
+      "validity": 70,
+      "consistency": 70,
+      "format": 30,
+      "capture": 25
+    },
+    "bands": {"LOW": 0, "MEDIUM": 25, "HIGH": 60},
+    "recapture_quality_below": 40
+  }
+}

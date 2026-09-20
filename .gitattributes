@@ -1,0 +1,7 @@
+# Windows batch files must have CRLF endings or cmd.exe mangles them -
+# the symptom is a window that flashes open and closes with no output.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Shell scripts must stay LF or bash fails on the carriage returns.
+*.sh text eol=lf

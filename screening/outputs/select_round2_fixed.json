@@ -1,0 +1,543 @@
+{
+ "synthetic": {
+  "exact_mrz": {
+   "all": "143/200 (71.5%)",
+   "holdout_font": "76/100 (76.0%)",
+   "national_id": "29/45 (64.4%)",
+   "passport": "36/48 (75.0%)",
+   "residence_permit": "40/52 (76.9%)",
+   "severity_0": "29/38 (76.3%)",
+   "severity_1": "36/49 (73.5%)",
+   "severity_2": "40/51 (78.4%)",
+   "severity_3": "38/62 (61.3%)",
+   "train_font": "67/100 (67.0%)",
+   "visa": "38/55 (69.1%)"
+  },
+  "mean_secs": 0.31,
+  "failures": [
+   {
+    "doc_type": "visa",
+    "font": "train_font",
+    "conditions": [
+     "defocus",
+     "jpeg",
+     "low_light"
+    ],
+    "expected": [
+     "V<UTOSMITH<<AKSHIT<JOHN<<<<<<<<<<<<<<<<<<<<<",
+     "S7D6LET736ARE0206248M2609197FC0W6ZRKJ<<<<<<<"
+    ],
+    "got": [
+     "V<UTOSMITH<<AKSHIT<JOHN<<<<<<<<<<<<<<<<<<<<<",
+     "87DELET736ARE0206248M2609197FC0WW2RKJ<<<<<<<"
+    ],
+    "valid": true
+   },
+   {
+    "doc_type": "national_id",
+    "font": "holdout_font",
+    "conditions": [
+     "noise",
+     "low_light",
+     "shadow"
+    ],
+    "expected": [
+     "IDUTOLPG6GFK2<9<<<<<<<<<<<<<<<",
+     "4409210F2707071UTO<<<<<<<<<<<4",
+     "BANERJEE<<KAVYA<LIAM<<<<<<<<<<"
+    ],
+    "got": [
+     "44092100F27077071UTOO<<<<<<<<<<<<<4<",
+     "I<BANERJEE<<KAVOYA<LIAM<<<<<<<<<<0<<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "national_id",
+    "font": "train_font",
+    "conditions": [],
+    "expected": [
+     "IDUTOG2J20SXT<7<<<<<<<<<<<<<<<",
+     "5706293M2708263UTO<<<<<<<<<<<4",
+     "IYER<<MEERA<RAJ<JOHN<<<<<<<<<<"
+    ],
+    "got": [
+     "IDUTOG2J20SXT<7<<<<<<<<<<<<<<<",
+     "5706293M2708263UTO<<<<<<<<<<<4",
+     "JYER<<MEERA<RAJ<JOHN<<<<<<<<<<"
+    ],
+    "valid": true
+   },
+   {
+    "doc_type": "visa",
+    "font": "holdout_font",
+    "conditions": [
+     "glare",
+     "defocus",
+     "color_cast",
+     "shadow"
+    ],
+    "expected": [
+     "V<UTOPANDEY<VERMA<<KAVYA<PEMA<<<<<<<<<<<<<<<",
+     "UB496AX526NGA9609163F3107162TOM3FN388<<<<<<<"
+    ],
+    "got": [
+     "V<UTOPANDEY<VERMA<<KAVYA<PEMA<<<<<<<<<<<<<<<",
+     "U8496AX526NGA9609163F3107162TOM3FN388<<<<<<<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "residence_permit",
+    "font": "holdout_font",
+    "conditions": [
+     "glare",
+     "color_cast",
+     "overexposed",
+     "tiny"
+    ],
+    "expected": [
+     "IRUTOCV73CF23S7<<<<<<<<<<<<<<<",
+     "5010110M2904205SGP<<<<<<<<<<<4",
+     "CHOUDHARY<<TENZIN<XAVIER<<<<<<"
+    ],
+    "got": [
+     "IXO<NUZN3LLS<S<AG80D7JHKCW0OJHILD<<<",
+     "<<<IS7SNSN0ZMN067Z1J<I<TJOUTIJOVS<<<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "visa",
+    "font": "train_font",
+    "conditions": [
+     "low_light",
+     "jpeg"
+    ],
+    "expected": [
+     "V<UTOSUBRAMANIAM<OLIVEIRA<<SIDDHARTH<LUCAS<<",
+     "R29W8183K8ARE9608155X2509301FQO33QB14<<<<<<<"
+    ],
+    "got": [
+     "V<UTOSUBRAMANIAM<OLIVEIRA<<SIDDHARTH<LUCAS<<",
+     "R29W8I83K8ARE9608155X2509301FQO33QBI4<<<<<<<"
+    ],
+    "valid": true
+   },
+   {
+    "doc_type": "residence_permit",
+    "font": "holdout_font",
+    "conditions": [],
+    "expected": [
+     "IRUTOEL5606D6H0<<<<<<<<<<<<<<<",
+     "9012237M3508275CAN<<<<<<<<<<<0",
+     "LI<MULLER<<RAJ<MOHAMMED<<<<<<<"
+    ],
+    "got": [
+     "IU<LFIRUTOEL5606D6H0<<<<<<<<<<<<<<0<",
+     "1I6519012237M3508275CAN<<<<<<<<<<<2<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "residence_permit",
+    "font": "train_font",
+    "conditions": [
+     "occlusion",
+     "shadow",
+     "noise"
+    ],
+    "expected": [
+     "IRUTOEKFDVC55<9<<<<<<<<<<<<<<<",
+     "6410201M2907044ARE<<<<<<<<<<<4",
+     "OLIVEIRA<<ERIK<ADITYA<ROHAN<<<"
+    ],
+    "got": [
+     "IRUTOEKFDVC55<9<<<<<<<<<<<<<<<",
+     "6410201M2907044ARE<<<<<<<<<<<4",
+     "QEIVEIRA<<ERIK<ADITYA<ROHAN<<<"
+    ],
+    "valid": true
+   },
+   {
+    "doc_type": "national_id",
+    "font": "holdout_font",
+    "conditions": [],
+    "expected": [
+     "IDUTOON64E993U4<<<<<<<<<<<<<<<",
+     "6408103F3007217UTO<<<<<<<<<<<2",
+     "LI<<EMMA<ADITYA<<<<<<<<<<<<<<<"
+    ],
+    "got": [
+     "V2V6408103F3007217UTO<<<<<<<<<<<<<<2",
+     "AOILLI<<EMMA<ADITYAA<<<<<<<<<<<<<<<<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "national_id",
+    "font": "holdout_font",
+    "conditions": [
+     "color_cast",
+     "low_light",
+     "tiny"
+    ],
+    "expected": [
+     "IDUTONS20N0YAG0<<<<<<<<<<<<<<<",
+     "7511079M2612188UTO<<<<<<<<<<<0",
+     "SHARMA<WOJCIECHOWSKA<<FATIMA<T"
+    ],
+    "got": [],
+    "valid": false
+   },
+   {
+    "doc_type": "national_id",
+    "font": "train_font",
+    "conditions": [
+     "overexposed",
+     "shadow",
+     "defocus"
+    ],
+    "expected": [
+     "IDUTOR286UL7R<6<<<<<<<<<<<<<<<",
+     "0605195M3001282UTO<<<<<<<<<<<2",
+     "CHATTERJEE<<SANA<<<<<<<<<<<<<<"
+    ],
+    "got": [
+     "IDUTOR286UL7R<6<<<<<<<<<<<<<<<",
+     "0605195M3001282UTO<<<<<<<<<<<2",
+     "CHATKERJEE<<SANA<<<<<<<<<<<<<<"
+    ],
+    "valid": true
+   },
+   {
+    "doc_type": "residence_permit",
+    "font": "holdout_font",
+    "conditions": [
+     "glare",
+     "low_light",
+     "motion_blur"
+    ],
+    "expected": [
+     "IRUTOW9KWVC6J87<<<<<<<<<<<<<<<",
+     "8302021F3507223NGA<<<<<<<<<<<4",
+     "OKAFOR<<LUCAS<<<<<<<<<<<<<<<<<"
+    ],
+    "got": [
+     "IRUTOW9KWVC6I87<<<<<<<<<<<<<<<",
+     "8302021F3507223NGA<<<<<<<<<<<4",
+     "OKAFOR<<LUCAS<<<<<<<<<<<<<<<<<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "residence_permit",
+    "font": "holdout_font",
+    "conditions": [
+     "motion_blur",
+     "occlusion",
+     "color_cast",
+     "shadow"
+    ],
+    "expected": [
+     "IRUTORGM59DZA76<<<<<<<<<<<<<<<",
+     "5409044F2708193LKA<<<<<<<<<<<0",
+     "MARTIN<BANERJEE<<MIN<<<<<<<<<<"
+    ],
+    "got": [
+     "IRUTORGM59DZA762<<<<<D<<<<9<V<<<<<<B",
+     "<B2RTS09E52G06R16E5LRA200<<<<<<<<0<<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "visa",
+    "font": "train_font",
+    "conditions": [
+     "occlusion",
+     "shadow"
+    ],
+    "expected": [
+     "VCUTOO<CONNOR<PARKER<<ANANYA<ANIKA<ERIK<<<<<",
+     "NIIH1122V7AUS6502089M2602202V27LMMD3H<<<<<<<"
+    ],
+    "got": [
+     "PFN4G<VCUTO<CANOR<PARERR<<NANYA<AIIA<ER<<<<<",
+     "<NHHH22V77AUS60208M226022022V277LWD3H<<<<<<<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "national_id",
+    "font": "holdout_font",
+    "conditions": [
+     "shadow"
+    ],
+    "expected": [
+     "IDUTO20W891NQJ8<<<<<<<<<<<<<<<",
+     "5708068X2805139UTO<<<<<<<<<<<4",
+     "KHAN<<DEV<KAVYA<<<<<<<<<<<<<<<"
+    ],
+    "got": [
+     "15770806808X2805139UTO<<S<<<<<<<<<<4",
+     "FIKKHAN<<DEV<KAVYA<<<<<<<<<<<<<<<<6<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "national_id",
+    "font": "train_font",
+    "conditions": [
+     "color_cast"
+    ],
+    "expected": [
+     "IDUTOH9398FBE99<<<<<<<<<<<<<<<",
+     "1304244M3409291UTO<<<<<<<<<<<4",
+     "SUBRAMANIAM<<OLIVIA<ZARA<<<<<<"
+    ],
+    "got": [],
+    "valid": false
+   },
+   {
+    "doc_type": "national_id",
+    "font": "holdout_font",
+    "conditions": [],
+    "expected": [
+     "IDUTOJFU776M8<2<<<<<<<<<<<<<<<",
+     "7501229F3001112UTO<<<<<<<<<<<4",
+     "LI<<OLIVIA<DEEPIKA<<<<<<<<<<<<"
+    ],
+    "got": [
+     "I1IDUUITOJFU776M8<2<<<<<<<<<<<<<<<<<",
+     "87501229F3001112UTOO<<<<<<<<<<<<4<IL"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "passport",
+    "font": "train_font",
+    "conditions": [
+     "noise",
+     "motion_blur",
+     "occlusion"
+    ],
+    "expected": [
+     "P<UTOCHOUDHARY<<YUKI<<<<<<<<<<<<<<<<<<<<<<<<",
+     "8019S67TR3UTO8103310X3205172<<<<<<<<<<<<<<00"
+    ],
+    "got": [],
+    "valid": false
+   },
+   {
+    "doc_type": "passport",
+    "font": "train_font",
+    "conditions": [
+     "jpeg",
+     "shadow",
+     "tiny"
+    ],
+    "expected": [
+     "P<UTODAS<<YUKI<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "I3P627DR07UTO6712282M3206261<<<<<<<<<<<<<<04"
+    ],
+    "got": [
+     "P<UTOBAS<<YUKIHYUYT<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "I3P627DR07UTO6712282M3206261<<<<<<<<<<<<<<04"
+    ],
+    "valid": true
+   },
+   {
+    "doc_type": "national_id",
+    "font": "holdout_font",
+    "conditions": [],
+    "expected": [
+     "IDUTOEX20XM1R97<<<<<<<<<<<<<<<",
+     "4206073X2706306UTO<<<<<<<<<<<0",
+     "PATEL<<JOHN<LUCAS<EMMA<<<<<<<<"
+    ],
+    "got": [
+     "IDUTOEX20XM1R97<<<<<<<<<<<<<<<",
+     "4206073X2706306UTO<<<<<<<<<<<0",
+     "PAT5L<<JOHN<LUCAS<EMMA<<<<<<<<"
+    ],
+    "valid": true
+   },
+   {
+    "doc_type": "visa",
+    "font": "train_font",
+    "conditions": [
+     "shadow",
+     "low_light",
+     "jpeg",
+     "motion_blur"
+    ],
+    "expected": [
+     "V<UTODAS<<ELENA<JOHN<<<<<<<<<<<<<<<<<<<<<<<<",
+     "JP60618238SGP0307112X26092565Y75H5409<<<<<<<"
+    ],
+    "got": [
+     "IP<UTND4AS<<ELENA<JOHNN<<<<<<<<<<<4<",
+     "30P9606182Z38SGP03071212X25092585Y72"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "visa",
+    "font": "train_font",
+    "conditions": [
+     "jpeg",
+     "glare",
+     "defocus",
+     "color_cast"
+    ],
+    "expected": [
+     "V<UTOMUKHERJEE<<GURPREET<LUCAS<ANA<<<<<<<<<<",
+     "A284UESH92NGA1802256F2609234YDQB4PT8L<<<<<<<"
+    ],
+    "got": [
+     "V<UTOMUKHERJEE<<GURPREET<LUCAS<ANA<<",
+     "A284UESH92NGA1802256F2609234YDQB4PTL"
+    ],
+    "valid": true
+   },
+   {
+    "doc_type": "residence_permit",
+    "font": "train_font",
+    "conditions": [
+     "color_cast",
+     "jpeg",
+     "rotate90"
+    ],
+    "expected": [
+     "IRUTOLKZTZ0NM<7<<<<<<<<<<<<<<<",
+     "4609205F2407027BTN<<<<<<<<<<<8",
+     "DUBOIS<<PIOTR<<<<<<<<<<<<<<<<<"
+    ],
+    "got": [
+     "J1S5<55<<5<<<<<<5<<<8H1OI8H<<SIO80CJ",
+     "8<<<<<P<<<SS<N1L8ZZ0ZOPZJSO0Z609P<<P"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "passport",
+    "font": "holdout_font",
+    "conditions": [
+     "jpeg",
+     "noise",
+     "motion_blur"
+    ],
+    "expected": [
+     "P<UTOMARTIN<<MIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "MDV43Q20B2UTO9912120M2712033<<<<<<<<<<<<<<08"
+    ],
+    "got": [],
+    "valid": false
+   },
+   {
+    "doc_type": "passport",
+    "font": "train_font",
+    "conditions": [
+     "motion_blur"
+    ],
+    "expected": [
+     "P<UTOIYER<<ANANYA<<<<<<<<<<<<<<<<<<<<<<<<<<<",
+     "8IG1WVN296UTO9912142F3011087<<<<<<<<<<<<<<00"
+    ],
+    "got": [],
+    "valid": false
+   },
+   {
+    "doc_type": "residence_permit",
+    "font": "train_font",
+    "conditions": [
+     "jpeg"
+    ],
+    "expected": [
+     "IRUTOI7F78907<5<<<<<<<<<<<<<<<",
+     "4210197X2703062DEU<<<<<<<<<<<0",
+     "GURUNG<<PRIYA<<<<<<<<<<<<<<<<<"
+    ],
+    "got": [
+     "IRUTOI7F78907<5<<<<<<<<<<<<<<<<<<<8<",
+     "19412110197X2703062DEU<<<<<<<<<<<<<0"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "visa",
+    "font": "holdout_font",
+    "conditions": [
+     "color_cast",
+     "motion_blur",
+     "tiny"
+    ],
+    "expected": [
+     "V<UTOGUPTA<<PEMA<JOHN<<<<<<<<<<<<<<<<<<<<<<<",
+     "TKR561QKV7BRA9306060F2708104268J9881P<<<<<<<"
+    ],
+    "got": [
+     "V<4TOGHPTA<<PUNA<JOHN<<<<<<<<<<<<<<<<<<<<<<<",
+     "YKK561QKV7BRA9706060F2708104268798RYP<<<<<<<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "national_id",
+    "font": "holdout_font",
+    "conditions": [
+     "noise"
+    ],
+    "expected": [
+     "IDUTOR140QP96<0<<<<<<<<<<<<<<<",
+     "5705137M3010264UTO<<<<<<<<<<<2",
+     "BANERJEE<<DEV<ZARA<<<<<<<<<<<<"
+    ],
+    "got": [
+     "IDUTOR140QP96<0<<<<<<<<<<<<<<<",
+     "5705137M3010264UTO<<<<<<<<<WR2",
+     "BANERJEE<<DEV<ZARA<<<<<<<<<<<<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "national_id",
+    "font": "train_font",
+    "conditions": [
+     "overexposed",
+     "jpeg",
+     "shadow"
+    ],
+    "expected": [
+     "IDUTODW2GBS85M5<<<<<<<<<<<<<<<",
+     "4109233F2804305UTO<<<<<<<<<<<0",
+     "ROSSI<<XAVIER<ANIKA<CLAIRE<<<<"
+    ],
+    "got": [
+     "44109233F2804305UTO<<4<<S<<<<<<<<<<0",
+     "B95SI<<HXAYVIER<ANIKA<CLAIRE<<<<<<E<"
+    ],
+    "valid": false
+   },
+   {
+    "doc_type": "national_id",
+    "font": "train_font",
+    "conditions": [
+     "defocus",
+     "color_cast",
+     "glare"
+    ],
+    "expected": [
+     "IDUTOE42T7OM299<<<<<<<<<<<<<<<",
+     "6206169X3011227UTO<<<<<<<<<<<4",
+     "FITZGERALD<<JUN<MOHAMMED<<<<<<"
+    ],
+    "got": [
+     "9ISL<J<D<D<1<N<NH<J<N1<1<E1<1<NH<J<<",
+     "E27LJTCD5<DEN<N<J<N<JH1<1<J<<I44<<<<"
+    ],
+    "valid": false
+   }
+  ]
+ }
+}
