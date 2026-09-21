@@ -684,14 +684,26 @@ test("screening: only CLEAR passes without an officer being told", () => {
 test("screening: the summary keeps the verdict and drops the image data", () => {
     const { summarise } = require("../services/screening");
 
+    // This fixture is the shape the screening service actually returns -
+    // verdict under `risk`, the type under the primary document. An earlier
+    // version of this test asserted a flat shape the service has never
+    // produced, so it stayed green while every real verdict was dropped.
     const summary = summarise({
-        disposition: "REFER_TO_SUPERVISOR",
-        risk_score: 82,
-        risk_band: "HIGH",
-        document_type: "passport",
-        findings: [{ code: "MRZ_CHECKSUM" }, { code: "STAMP_COPY" }],
-        images: { rectified: "data:image/png;base64,AAAA" },
-        mrz: { surname: "SHARMA" },
+        screening_id: "6ca7d6c3dd4e4e8383a238dd7f6c4563",
+        risk: {
+            risk_score: 82,
+            risk_band: "HIGH",
+            disposition: "REFER_TO_SUPERVISOR",
+            reasons: [{ code: "MRZ_CHECKSUM" }, { code: "STAMP_COPY" }],
+        },
+        documents: [
+            {
+                document_type: "passport",
+                role: "primary",
+                annotated_image: "data:image/png;base64,AAAA",
+                ocr: { fields: { surname: "SHARMA" } },
+            },
+        ],
     });
 
     assert.deepStrictEqual(summary, {
@@ -705,6 +717,20 @@ test("screening: the summary keeps the verdict and drops the image data", () => 
     // holder's name into a trail everyone on the case can read.
     assert.ok(!JSON.stringify(summary).includes("base64"));
     assert.ok(!JSON.stringify(summary).includes("SHARMA"));
+});
+
+test("screening: a response in an unexpected shape yields no disposition", () => {
+    const { summarise } = require("../services/screening");
+
+    // screenVersion treats a null disposition as a failure and marks the
+    // version 'failed'. What must never happen is a throw in here or, worse,
+    // further down in the alert text - the service has answered by then, so
+    // the version would be left on 'pending' and read as never screened.
+    for (const body of [{}, { risk: null }, { risk: {}, documents: [] }]) {
+        const summary = summarise(body);
+        assert.strictEqual(summary.disposition, null);
+        assert.strictEqual(summary.document_type, null);
+    }
 });
 
 // ---------------------------------------------------------------

@@ -60,14 +60,37 @@ async function screen(buffer, { filename, mimeType, officerId }) {
 
 // What an officer reads on the case trail. Deliberately short: the full
 // verdict is kept in screening_result for anyone who wants the detail.
+//
+// The shape here is the screening service's documented contract (see
+// screening/README.md): the verdict lives under `risk`, the reasons that
+// drove it are `risk.reasons`, and the type it decided the document is
+// belongs to the primary document rather than the response as a whole.
 function summarise(result) {
+    const risk = (result && result.risk) || {};
+    const documents = Array.isArray(result && result.documents) ? result.documents : [];
+    const primary = documents.find((doc) => doc && doc.role === "primary") || documents[0] || null;
+
     return {
-        disposition: result.disposition,
-        risk_score: result.risk_score,
-        risk_band: result.risk_band,
-        document_type: result.document_type || null,
-        findings: Array.isArray(result.findings) ? result.findings.length : null,
+        disposition: risk.disposition || null,
+        risk_score: risk.risk_score === undefined ? null : risk.risk_score,
+        risk_band: risk.risk_band || null,
+        document_type: (primary && primary.document_type) || null,
+        findings: Array.isArray(risk.reasons) ? risk.reasons.length : null,
     };
+}
+
+// Anything that stops a verdict being recorded lands here. A version left
+// on 'pending' is indistinguishable from one still in the queue, which is
+// exactly how an unscreened document comes to look like a clean one.
+async function markFailed(versionId) {
+    await db
+        .query(
+            `UPDATE document_versions
+                SET screening_status = 'failed', screened_at = now()
+              WHERE id = $1`,
+            [versionId]
+        )
+        .catch(() => {});
 }
 
 // ---------------------------------------------------------------
@@ -89,18 +112,24 @@ async function screenVersion({ versionId, documentId, caseId, version, evidenceN
         result = await screen(buffer, { filename, mimeType, officerId });
     } catch (err) {
         console.error(`screening failed for ${evidenceNumber} v${version}:`, err.message);
-        await db
-            .query(
-                `UPDATE document_versions
-                    SET screening_status = 'failed', screened_at = now()
-                  WHERE id = $1`,
-                [versionId]
-            )
-            .catch(() => {});
+        await markFailed(versionId);
         return null;
     }
 
     const summary = summarise(result);
+
+    // A 200 we cannot read is a failure, not a verdict. Without this a
+    // response in an unexpected shape reaches the alert text below and
+    // throws there instead - after the service has already answered, so
+    // the catch above never runs and the version stays 'pending' forever.
+    if (!summary.disposition) {
+        console.error(
+            `screening returned no disposition for ${evidenceNumber} v${version} - ` +
+                `unexpected response shape`
+        );
+        await markFailed(versionId);
+        return null;
+    }
 
     // The upload path knows the case id but not its number; the alert
     // text needs the number an officer would recognise.
@@ -109,42 +138,50 @@ async function screenVersion({ versionId, documentId, caseId, version, evidenceN
         caseNumber = rows[0] ? rows[0].case_number : caseId;
     }
 
-    await db.transaction(async (client) => {
-        await client.query(
-            `UPDATE document_versions
-                SET screening_status = 'done', screening_result = $2, screened_at = now()
-              WHERE id = $1`,
-            [versionId, result]
-        );
+    try {
+        await db.transaction(async (client) => {
+            await client.query(
+                `UPDATE document_versions
+                    SET screening_status = 'done', screening_result = $2, screened_at = now()
+                  WHERE id = $1`,
+                [versionId, result]
+            );
 
-        await audit.append(
-            {
-                userId: officerId || null,
-                action: "screening",
-                documentId,
-                caseId,
-                version,
-                detail: { evidence_number: evidenceNumber, ...summary },
-                ip: null,
-            },
-            client
-        );
+            await audit.append(
+                {
+                    userId: officerId || null,
+                    action: "screening",
+                    documentId,
+                    caseId,
+                    version,
+                    detail: { evidence_number: evidenceNumber, ...summary },
+                    ip: null,
+                },
+                client
+            );
 
-        if (!isFlagged(summary.disposition)) return;
+            if (!isFlagged(summary.disposition)) return;
 
-        const message =
-            `Evidence ${evidenceNumber} v${version} in case ${caseNumber} was screened as ` +
-            `${summary.disposition.replace(/_/g, " ").toLowerCase()} ` +
-            `(risk ${summary.risk_score}): ${FLAGGED[summary.disposition] || "see the result"}.`;
+            const message =
+                `Evidence ${evidenceNumber} v${version} in case ${caseNumber} was screened as ` +
+                `${summary.disposition.replace(/_/g, " ").toLowerCase()} ` +
+                `(risk ${summary.risk_score}): ${FLAGGED[summary.disposition] || "see the result"}.`;
 
-        await client.query(
-            `INSERT INTO notifications (user_id, kind, case_id, document_id, version, message)
-             SELECT user_id, 'screening_alert', $1, $2, $3, $4
-               FROM case_assignments
-              WHERE case_id = $1`,
-            [caseId, documentId, version, message]
-        );
-    });
+            await client.query(
+                `INSERT INTO notifications (user_id, kind, case_id, document_id, version, message)
+                 SELECT user_id, 'screening_alert', $1, $2, $3, $4
+                   FROM case_assignments
+                  WHERE case_id = $1`,
+                [caseId, documentId, version, message]
+            );
+        });
+    } catch (err) {
+        // The verdict arrived but recording it did not. Same reasoning as
+        // above: leave nothing on 'pending'.
+        console.error(`screening could not be recorded for ${evidenceNumber} v${version}:`, err.message);
+        await markFailed(versionId);
+        return null;
+    }
 
     return summary;
 }
